@@ -2,16 +2,19 @@ import Image from "next/image";
 import styles from "./project-item.module.css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Draggable from "gsap/dist/Draggable";
 import { useRef } from "react";
+import Link from "next/link";
 
 type Props = {
   imageUrl: string;
   title: string;
+  path: string;
 };
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, Draggable);
 
-export const ProjectItem = ({ imageUrl, title }: Props) => {
+export const ProjectItem = ({ imageUrl, title, path }: Props) => {
   const ref = useRef(null);
 
   useGSAP(() => {
@@ -26,8 +29,6 @@ export const ProjectItem = ({ imageUrl, title }: Props) => {
     const positionX = gsap.utils.random(0, maxX);
     const positionY = gsap.utils.random(0, maxY);
 
-    console.log(title, positionX, positionY);
-
     gsap.to(ref.current || {}, {
       duration: 0.15,
       x: 0,
@@ -35,17 +36,24 @@ export const ProjectItem = ({ imageUrl, title }: Props) => {
       top: `${positionY}%`,
       left: `${positionX}%`,
     });
+
+    Draggable.create(ref.current, {
+      inertia: false,
+      bounds: "#main",
+      activeCursor: "grab",
+      allowContextMenu: true,
+      dragResistance: 0.1,
+    });
   });
 
   return (
-    <div ref={ref} style={{ position: "absolute" }}>
-      <Image
-        src={imageUrl}
-        width={200}
-        height={200}
-        alt={title}
-        className={styles["project-item"]}
-      />
-    </div>
+    <Link
+      ref={ref}
+      href={path}
+      style={{ position: "absolute" }}
+      className={styles["project-item"]}
+    >
+      <Image src={imageUrl} width={200} height={200} alt={title} />
+    </Link>
   );
 };

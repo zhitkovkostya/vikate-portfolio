@@ -8,7 +8,7 @@
   cursor: pointer;
 }
 
-.project-item:hover {
+.project-item:hover img {
   transform: scale(1.05);
   transform-origin: center center;
 }
