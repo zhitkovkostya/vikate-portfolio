@@ -58,7 +58,7 @@ export const ProjectItem = ({ imageUrl, title, path }: Props) => {
       <img
         src={imageUrl}
         alt={title}
-        style={{ maxWidth: 200, maxHeight: 200 }}
+        style={{ maxWidth: 300, maxHeight: 300 }}
       />
     </Link>
   );
