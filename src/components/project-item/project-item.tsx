@@ -5,6 +5,7 @@ import gsap from "gsap";
 import Draggable from "gsap/dist/Draggable";
 import { useRef } from "react";
 import Link from "next/link";
+import { Sticker } from "../sticker";
 
 type Props = {
   imageUrl: string;
@@ -15,51 +16,5 @@ type Props = {
 gsap.registerPlugin(useGSAP, Draggable);
 
 export const ProjectItem = ({ imageUrl, title, path }: Props) => {
-  const ref = useRef<HTMLAnchorElement>(null);
-
-  useGSAP(() => {
-    if (ref.current) {
-      const imageWidth = ref.current.clientWidth;
-      const imageHeight = ref.current.clientHeight;
-      const containerWidth = window.screen.width;
-      const containerHeight = window.screen.height;
-
-      const maxX = ((containerWidth - imageWidth) / containerWidth) * 100;
-      const maxY = ((containerHeight - imageHeight) / containerHeight) * 100;
-
-      const positionX = gsap.utils.random(0, maxX);
-      const positionY = gsap.utils.random(0, maxY);
-
-      gsap.to(ref.current, {
-        duration: 0.15,
-        x: 0,
-        y: 0,
-        top: `${positionY}%`,
-        left: `${positionX}%`,
-      });
-
-      Draggable.create(ref.current, {
-        inertia: false,
-        bounds: ".project-list",
-        activeCursor: "grab",
-        allowContextMenu: true,
-        dragResistance: 0.1,
-      });
-    }
-  });
-
-  return (
-    <Link
-      ref={ref}
-      href={path}
-      style={{ position: "absolute" }}
-      className={styles["project-item"]}
-    >
-      <img
-        src={imageUrl}
-        alt={title}
-        style={{ maxWidth: 300, maxHeight: 300 }}
-      />
-    </Link>
-  );
+  return <Sticker imageUrl={imageUrl} title={title} path={path} />;
 };

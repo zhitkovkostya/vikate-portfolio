@@ -5,14 +5,15 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { client } from "../../../tina/__generated__/client";
 import { ProjectList } from "@/components/project-list";
 import { Inter } from "next/font/google";
-import probe from "probe-image-size";
+import { Project } from "@/types/project";
 
 const inter = Inter({ subsets: ["latin"] });
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const ProjectPage = (props: Props) => {
-  const { data } = useTina({
+  const { data } = useTina<Project>({
+    // @ts-ignore
     query: props.query,
     variables: props.variables,
     data: props.data,
@@ -21,7 +22,7 @@ const ProjectPage = (props: Props) => {
   return (
     <>
       <Head>
-        <title>{data?.project.title}</title>
+        <title>{data?.title}</title>
       </Head>
       <main
         className={`${inter.className}`}
@@ -29,14 +30,16 @@ const ProjectPage = (props: Props) => {
         style={{ height: "100vh", width: "100vw" }}
       >
         <h1 className="text-3xl m-8 text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          {data?.project.title}
+          {data?.title}
         </h1>
-        <TinaMarkdown components={components} content={data?.project.body} />
+        <TinaMarkdown components={components} content={data?.body} />
         <ProjectList
-          projects={data?.project.gallery.map((item) => ({
+          projects={data?.gallery.map((item) => ({
             thumbnail: item.image,
             title: item.title,
             slug: item.title,
+            gallery: [],
+            body: [],
           }))}
         />
       </main>
@@ -44,19 +47,26 @@ const ProjectPage = (props: Props) => {
   );
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { filename: string };
+}) => {
   let data = {
-    project: {
-      gallery: [],
-    },
-  };
+    title: "",
+    thumbnail: "",
+    slug: "",
+    gallery: [],
+    body: [],
+  } as Project;
   let query = {};
   let variables = { relativePath: `${params.filename}.md` };
   try {
     const res = await client.queries?.project(variables);
 
     query = res.query;
-    data = res.data;
+    // @ts-ignore
+    data = res.data.project;
     variables = res.variables;
   } catch (e) {
     // swallow errors related to document creation
@@ -88,7 +98,7 @@ export const getStaticPaths = async () => {
 
 export default ProjectPage;
 
-const PageSection = (props) => {
+const PageSection = (props: { heading: string; content: string }) => {
   return (
     <>
       <h2>{props.heading}</h2>

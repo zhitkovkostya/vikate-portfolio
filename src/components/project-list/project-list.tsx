@@ -1,8 +1,9 @@
+import { Project } from "@/types/project";
 import { ProjectItem } from "../project-item";
 import styles from "./project-list.module.css";
 
 type Props = {
-  projects: { slug: string; thumbnail: string; title: string }[];
+  projects: Project[];
 };
 
 export const ProjectList = ({ projects }: Props) => {

@@ -1,12 +1,11 @@
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import { useTina } from "tinacms/dist/react";
 import { Inter } from "next/font/google";
 import styles from "./index.module.css";
 import { Logo } from "@/components/logo";
 import { ProjectList } from "@/components/project-list";
 import client from "../../tina/__generated__/client";
+import { Project } from "@/types/project";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,17 +29,18 @@ export default function Home({ projects }: Props) {
 }
 
 export const getStaticProps = async () => {
-  let projects = [];
+  let projects = [] as Project[];
 
   try {
     const res = await client.queries?.projectConnection();
-    projects = res.data.projectConnection?.edges?.map((project) => {
-      return {
-        slug: project?.node?._sys.filename,
-        title: project?.node?.title,
-        thumbnail: project?.node?.thumbnail,
-      };
-    });
+    projects =
+      res.data.projectConnection.edges?.map((project) => ({
+        slug: project?.node?._sys.filename ?? "",
+        title: project?.node?.title ?? "",
+        thumbnail: project?.node?.thumbnail ?? "",
+        body: [],
+        gallery: [],
+      })) ?? [];
   } catch {
     // swallow errors related to document creation
   }

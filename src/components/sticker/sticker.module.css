@@ -4,8 +4,14 @@
           drop-shadow(0px 4px 0 white)
           drop-shadow(0px -4px 0 white)
           drop-shadow(0px 0px 2px black);
-  transition: transform 0.15s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
   cursor: pointer;
+}
+
+.project-item img {
+  transition: transform 0.15s;
 }
 
 .project-item:hover img {
