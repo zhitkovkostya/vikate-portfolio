@@ -15,35 +15,37 @@ type Props = {
 gsap.registerPlugin(useGSAP, Draggable);
 
 export const ProjectItem = ({ imageUrl, title, path }: Props) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLAnchorElement>(null);
 
   useGSAP(() => {
-    const imageWidth = 300;
-    const imageHeight = 300;
-    const containerWidth = 1000;
-    const containerHeight = 1000;
+    if (ref.current) {
+      const imageWidth = ref.current.clientWidth;
+      const imageHeight = ref.current.clientHeight;
+      const containerWidth = window.screen.width;
+      const containerHeight = window.screen.height;
 
-    const maxX = ((containerWidth - imageWidth) / containerWidth) * 100;
-    const maxY = ((containerHeight - imageHeight) / containerHeight) * 100;
+      const maxX = ((containerWidth - imageWidth) / containerWidth) * 100;
+      const maxY = ((containerHeight - imageHeight) / containerHeight) * 100;
 
-    const positionX = gsap.utils.random(0, maxX);
-    const positionY = gsap.utils.random(0, maxY);
+      const positionX = gsap.utils.random(0, maxX);
+      const positionY = gsap.utils.random(0, maxY);
 
-    gsap.to(ref.current || {}, {
-      duration: 0.15,
-      x: 0,
-      y: 0,
-      top: `${positionY}%`,
-      left: `${positionX}%`,
-    });
+      gsap.to(ref.current, {
+        duration: 0.15,
+        x: 0,
+        y: 0,
+        top: `${positionY}%`,
+        left: `${positionX}%`,
+      });
 
-    Draggable.create(ref.current, {
-      inertia: false,
-      bounds: "#main",
-      activeCursor: "grab",
-      allowContextMenu: true,
-      dragResistance: 0.1,
-    });
+      Draggable.create(ref.current, {
+        inertia: false,
+        bounds: "#main",
+        activeCursor: "grab",
+        allowContextMenu: true,
+        dragResistance: 0.1,
+      });
+    }
   });
 
   return (
@@ -53,7 +55,11 @@ export const ProjectItem = ({ imageUrl, title, path }: Props) => {
       style={{ position: "absolute" }}
       className={styles["project-item"]}
     >
-      <Image src={imageUrl} width={200} height={200} alt={title} />
+      <img
+        src={imageUrl}
+        alt={title}
+        style={{ maxWidth: 200, maxHeight: 200 }}
+      />
     </Link>
   );
 };

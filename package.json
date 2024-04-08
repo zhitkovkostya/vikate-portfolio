@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev\"",
+    "build": "tinacms build && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -12,11 +12,15 @@
     "@gsap/react": "^2.1.0",
     "gsap": "^3.12.5",
     "next": "14.1.4",
+    "probe-image-size": "^7.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "tinacms": "^1.6.1"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@tinacms/cli": "^1.5.43",
+    "@types/node": "^20.12.5",
+    "@types/probe-image-size": "^7.2.4",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
