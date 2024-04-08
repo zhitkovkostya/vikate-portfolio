@@ -40,7 +40,7 @@ export const ProjectItem = ({ imageUrl, title, path }: Props) => {
 
       Draggable.create(ref.current, {
         inertia: false,
-        bounds: "#main",
+        bounds: ".project-list",
         activeCursor: "grab",
         allowContextMenu: true,
         dragResistance: 0.1,

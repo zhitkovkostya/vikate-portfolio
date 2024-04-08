@@ -1,4 +1,5 @@
 import { ProjectItem } from "../project-item";
+import styles from "./project-list.module.css";
 
 type Props = {
   projects: { slug: string; thumbnail: string; title: string }[];
@@ -6,7 +7,7 @@ type Props = {
 
 export const ProjectList = ({ projects }: Props) => {
   return (
-    <div className="project-list">
+    <div className={`${styles["project-list"]} project-list`}>
       {projects.map(({ thumbnail, title, slug }) => (
         <div className="box" key={slug}>
           <ProjectItem
