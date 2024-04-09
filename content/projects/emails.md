@@ -2,6 +2,8 @@
 title: рассылки
 thumbnail: /project-1.png
 gallery:
+  - title: декабрь
+    image: /в-ожидании.gif
   - title: регулярка театр
     image: /регулярка театр.gif
   - title: концерты
