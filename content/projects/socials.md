@@ -2,7 +2,8 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
-  - {}
+  - title: они сказали
+    image: /18.png
   - title: черным черно
     image: /cover66-1.png
   - title: нет монет
