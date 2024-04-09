@@ -2,6 +2,8 @@
 title: рассылки
 thumbnail: /project-1.png
 gallery:
+  - title: апрель
+    image: /царь-апрель-спб.gif
   - title: глазки
     image: /глазки.gif
   - title: Рассылка 3
