@@ -2,6 +2,8 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
+  - title: нет монет
+    image: /cover-5.png
   - title: мейби бейби
     image: /cover-1.png
   - title: ёлочка вик
