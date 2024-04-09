@@ -1,6 +1,7 @@
 import { defineConfig } from "tinacms";
 import { globalCollection } from "./collections/global";
 import { projectCollection } from "./collections/project";
+import { homeCollection } from "./collections/home";
 
 const branch =
   process.env.GITHUB_BRANCH ||
@@ -25,6 +26,7 @@ export default defineConfig({
   schema: {
     collections: [
       globalCollection,
+      homeCollection,
       projectCollection,
     ],
   },

@@ -1,0 +1,8 @@
+query pageWithGlobal($relativePath: String!) {
+  home(relativePath: $relativePath) {
+    ...HomeParts
+  }
+  global(relativePath: "global.md") {
+    ...GlobalParts
+  }
+}

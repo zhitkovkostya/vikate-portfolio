@@ -27,7 +27,7 @@ export default function Home(props: Props) {
       </Head>
       <main>
         <Content>
-          <TinaMarkdown content={data.global.body} />
+          <TinaMarkdown content={data.home.body} />
         </Content>
         <ProjectList projects={props.data.projects} />
       </main>
@@ -45,16 +45,17 @@ export const getStaticProps = async () => {
       body: [],
       gallery: [],
     })) ?? [] as Project[];
-  const variables = { relativePath: `global.md` };
-  const globalRes = await client.queries?.global(variables);
+  const homeVariables = { relativePath: `home.md` };
+  const homeRes = await client.queries?.pageWithGlobal(homeVariables);
 
   const props = {
     data: {
-      ...globalRes.data,
+      ...homeRes.data,
+      // ...globalRes.data,
       projects,
     },
-    query: globalRes.query,
-    variables: globalRes.variables,
+    query: homeRes.query,
+    variables: homeRes.variables,
   };
 
   return {
