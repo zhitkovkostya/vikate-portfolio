@@ -2,6 +2,8 @@
 title: рассылки
 thumbnail: /project-1.png
 gallery:
+  - title: пробежимся
+    image: /пробежимся.png
   - title: искра
     image: /искра.png
   - title: сбпятница
