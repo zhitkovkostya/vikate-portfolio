@@ -3,6 +3,8 @@ title: соцсети
 thumbnail: /project-2.png
 gallery:
   - {}
+  - title: послушайте перед просмотром
+    image: /б.png
   - title: варнава
     image: /148470568.jpg
   - title: эксперимент удался
