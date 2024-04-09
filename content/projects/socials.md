@@ -2,6 +2,8 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
+  - title: тест
+    image: /классика.png
   - title: гайд спб
     image: /cover1.jpg
   - title: они сказали
