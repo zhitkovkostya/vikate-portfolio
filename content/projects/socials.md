@@ -2,7 +2,8 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
-  - {}
+  - title: кауфман
+    image: /лл.png
   - title: послушайте перед просмотром
     image: /б.png
   - title: варнава
