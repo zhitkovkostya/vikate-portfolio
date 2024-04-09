@@ -2,6 +2,8 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
+  - title: чеховское
+    image: /Frame 277131631.png
   - title: драматическое
     image: /Frame 277131625.png
   - title: тест
