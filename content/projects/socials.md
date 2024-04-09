@@ -2,6 +2,10 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
+  - title: карлик нос
+    image: /1470386926.jpg
+  - title: катя нв
+    image: /1470386853.png
   - title: черепаха
     image: /черепаха.png
   - title: факты о клубах
