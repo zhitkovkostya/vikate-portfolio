@@ -2,6 +2,8 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
+  - title: варнава
+    image: /148470568.jpg
   - title: эксперимент удался
     image: /cover66.png
   - title: Обложка для проста про скандинавское кино
