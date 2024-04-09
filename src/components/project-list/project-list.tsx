@@ -6,7 +6,7 @@ type Props = {
   projects: Project[];
 };
 
-export const ProjectList = ({ projects }: Props) => {
+export const ProjectList = ({ projects = [] }: Props) => {
   return (
     <div className={`${styles["project-list"]} project-list`}>
       {projects.map(({ thumbnail, title, slug }) => (

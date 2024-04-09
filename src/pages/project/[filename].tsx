@@ -10,7 +10,7 @@ import { Content } from "@/features/content";
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const ProjectPage = (props: Props) => {
-  const { data } = useTina<Project>({
+  const { data } = useTina<{project: Project}>({
     // @ts-ignore
     query: props.query,
     variables: props.variables,
@@ -20,14 +20,14 @@ const ProjectPage = (props: Props) => {
   return (
     <>
       <Head>
-        <title>{data?.title} | викатэ</title>
+        <title>{data?.project.title} | викатэ</title>
       </Head>
       <main>
         <Content>
-          <TinaMarkdown components={components} content={data?.body} />
+          <TinaMarkdown components={components} content={data?.project.body} />
         </Content>
         <ProjectList
-          projects={data?.gallery.map((item) => ({
+          projects={data?.project.gallery?.map((item) => ({
             thumbnail: item.image,
             title: item.title,
             slug: item.title,
@@ -46,24 +46,24 @@ export const getStaticProps = async ({
   params: { filename: string };
 }) => {
   let data = {
-    title: "",
-    thumbnail: "",
-    slug: "",
-    gallery: [],
-    body: [],
-  } as Project;
+    project: {
+      title: "",
+      thumbnail: "",
+      slug: "",
+      gallery: [],
+      body: [],
+    } as Project,
+  };
   let query = {};
   let variables = { relativePath: `${params.filename}.md` };
-  try {
+  
     const res = await client.queries?.project(variables);
 
     query = res.query;
     // @ts-ignore
-    data = res.data.project;
+    data = res.data;
     variables = res.variables;
-  } catch (e) {
-    // swallow errors related to document creation
-  }
+ 
 
   // console.log(data.project.gallery);
 

@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
   
   return (
     <div className={inter.className}>
-      <Header pageTitle={pageProps.data?.title} />
+      <Header pageTitle={pageProps.data?.project?.title} />
       <Component {...pageProps} />
     </div>
   );
