@@ -2,6 +2,8 @@
 title: рассылки
 thumbnail: /project-1.png
 gallery:
+  - title: сбпятница
+    image: /сбпятница.png
   - title: коньки
     image: /коньки.png
   - title: веселиться тусить
