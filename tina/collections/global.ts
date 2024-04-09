@@ -20,7 +20,13 @@ export const globalCollection: Collection<false> = {
     },
   ],
   ui: {
-    router: ({ document }) => `/index.html`,
+    router: ({ document }) => {
+      console.log(document);
+      if (document._sys.filename === 'global') {
+        return '/';
+      }
+      return undefined;
+    },
     allowedActions: {
       create: false,
       delete: false

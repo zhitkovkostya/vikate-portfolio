@@ -14,6 +14,7 @@ const ProjectPage = (props: Props) => {
     // @ts-ignore
     query: props.query,
     variables: props.variables,
+    // @ts-ignore
     data: props.data,
   });
 
@@ -24,7 +25,7 @@ const ProjectPage = (props: Props) => {
       </Head>
       <main>
         <Content>
-          <TinaMarkdown components={components} content={data?.project.body} />
+          <TinaMarkdown content={data?.project.body} />
         </Content>
         <ProjectList
           projects={data?.project.gallery?.map((item) => ({
@@ -45,32 +46,29 @@ export const getStaticProps = async ({
 }: {
   params: { filename: string };
 }) => {
-  let data = {
-    project: {
-      title: "",
-      thumbnail: "",
-      slug: "",
-      gallery: [],
-      body: [],
-    } as Project,
-  };
-  let query = {};
-  let variables = { relativePath: `${params.filename}.md` };
+  // let data = {
+  //   project: {
+  //     title: "",
+  //     thumbnail: "",
+  //     slug: "",
+  //     gallery: [],
+  //     body: [],
+  //   } as Project,
+  // };
+  const variables = { relativePath: `${params.filename}.md` };
+  const res = await client.queries?.project(variables);
+  const globalVariables = { relativePath: `global.md` };
+  const globalRes = await client.queries?.global(globalVariables);
+
   
-    const res = await client.queries?.project(variables);
-
-    query = res.query;
-    // @ts-ignore
-    data = res.data;
-    variables = res.variables;
- 
-
-  // console.log(data.project.gallery);
 
   const props = {
-    variables: variables,
-    data: data,
-    query: query,
+    variables: res.variables,
+    data: {
+      ...res.data,
+      ...globalRes.data,
+    },
+    query: res.query,
   };
 
   return {
@@ -90,16 +88,3 @@ export const getStaticPaths = async () => {
 };
 
 export default ProjectPage;
-
-const PageSection = (props: { heading: string; content: string }) => {
-  return (
-    <>
-      <h2>{props.heading}</h2>
-      <p>{props.content}</p>
-    </>
-  );
-};
-
-const components = {
-  PageSection: PageSection,
-};
