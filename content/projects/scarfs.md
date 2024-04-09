@@ -2,6 +2,8 @@
 title: шарфики
 thumbnail: /project-3.png
 gallery:
+  - title: шарфик бестики
+    image: /IMG_3930 (2)11 1.png
   - title: чб3
     image: /DSCF3746 1.png
   - title: чб2
