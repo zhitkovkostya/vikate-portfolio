@@ -40,7 +40,6 @@ export const Sticker = ({ imageUrl, title, path }: Props) => {
 
       Draggable.create(ref.current, {
         inertia: true,
-        bounds: '#main',
         allowContextMenu: true,
         dragResistance: 0.1,
       });
