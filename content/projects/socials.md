@@ -2,6 +2,8 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
+  - title: мейби бейби
+    image: /cover-1.png
   - title: ёлочка вик
     image: /cover a.png
   - title: концерты в Петербурге
