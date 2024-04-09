@@ -2,6 +2,8 @@
 title: рассылки
 thumbnail: /project-1.png
 gallery:
+  - title: валентинка с сюрпризом
+    image: /banner.gif
   - title: апрель
     image: /царь-апрель-спб.gif
   - title: глазки
