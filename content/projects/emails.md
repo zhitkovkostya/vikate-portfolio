@@ -2,6 +2,8 @@
 title: рассылки
 thumbnail: /project-1.png
 gallery:
+  - title: концерты
+    image: /концерты.gif
   - title: валентинка с сюрпризом
     image: /banner.gif
   - title: апрель
