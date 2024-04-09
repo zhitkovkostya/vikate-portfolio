@@ -2,6 +2,8 @@
 title: рассылки
 thumbnail: /project-1.png
 gallery:
+  - title: смех слёзы
+    image: /Desktop email3.png
   - title: пробежимся
     image: /пробежимся.png
   - title: искра
