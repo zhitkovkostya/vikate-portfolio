@@ -4,10 +4,8 @@ import { InferGetStaticPropsType } from "next";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { client } from "../../../tina/__generated__/client";
 import { ProjectList } from "@/components/project-list";
-import { Inter } from "next/font/google";
 import { Project } from "@/types/project";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Content } from "@/features/content";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -22,17 +20,12 @@ const ProjectPage = (props: Props) => {
   return (
     <>
       <Head>
-        <title>{data?.title}</title>
+        <title>{data?.title} | викатэ</title>
       </Head>
-      <main
-        className={`${inter.className}`}
-        id="main"
-        style={{ height: "100vh", width: "100vw" }}
-      >
-        <h1 className="text-3xl m-8 text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          {data?.title}
-        </h1>
-        <TinaMarkdown components={components} content={data?.body} />
+      <main>
+        <Content>
+          <TinaMarkdown components={components} content={data?.body} />
+        </Content>
         <ProjectList
           projects={data?.gallery.map((item) => ({
             thumbnail: item.image,

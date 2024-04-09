@@ -1,13 +1,9 @@
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
-import { Inter } from "next/font/google";
-import styles from "./index.module.css";
-import { Logo } from "@/components/logo";
 import { ProjectList } from "@/components/project-list";
 import client from "../../tina/__generated__/client";
 import { Project } from "@/types/project";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Content } from "@/features/content";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -20,8 +16,10 @@ export default function Home({ projects }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`} id="main">
-        <Logo />
+      <main>
+        <Content>
+          Привет, я Вика 👋 Я дизайню в Яндексе 🦾 Также делала посты для Purpur, мерч для Цех Live и афиши для инди групп 🕺
+        </Content>
         <ProjectList projects={projects} />
       </main>
     </>
