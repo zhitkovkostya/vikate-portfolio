@@ -2,6 +2,8 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
+  - title: драматическое
+    image: /Frame 277131625.png
   - title: тест
     image: /классика.png
   - title: гайд спб
