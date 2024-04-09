@@ -29,6 +29,7 @@ export const Sticker = ({ imageUrl, title, path }: Props) => {
 
       const positionX = gsap.utils.random(0, maxX);
       const positionY = gsap.utils.random(0, maxY);
+      const rotation = gsap.utils.random(-25, 25);
 
       gsap.to(ref.current, {
         duration: 0.15,
@@ -36,6 +37,7 @@ export const Sticker = ({ imageUrl, title, path }: Props) => {
         y: 0,
         top: `${positionY}%`,
         left: `${positionX}%`,
+        rotate: rotation
       });
 
       Draggable.create(ref.current, {
