@@ -2,6 +2,8 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
+  - title: эксперимент удался
+    image: /cover66.png
   - title: Обложка для проста про скандинавское кино
     image: /scandi.jpg
   - title: 'Обложка для поста про абстрактный рэп '
