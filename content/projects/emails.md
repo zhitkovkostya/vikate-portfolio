@@ -1,6 +1,6 @@
 ---
 title: рассылки
-thumbnail: /project-1.png
+thumbnail: /письма.png
 gallery:
   - title: смех слёзы
     image: /Desktop email3.png
