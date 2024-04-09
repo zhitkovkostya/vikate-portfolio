@@ -1,4 +1,19 @@
 .content {
-  padding: 8rem calc(5% + 2rem) 0;
+  padding: 8rem 2rem 0;
   font-size: 3.2vw;
+  font-weight: 300;
+}
+
+@media screen and (min-width: 60em) {
+  .content {
+    padding-left: calc(5% + 2rem);
+    padding-right: calc(5% + 2rem);
+  }
+}
+
+@media screen and (min-width: 30em) and (max-width: 60em) {
+  .content {
+    padding-top: 6rem;
+    font-size: 36px;
+  }
 }

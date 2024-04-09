@@ -3,9 +3,16 @@
   display: flex;
   gap: 2rem;
   width: 100%;
-  padding: 1rem calc(5% + 2rem);
+  padding: 1rem 2rem;
   border-bottom: 2px solid;
   border-color: rgb(var(--foreground-rgb));
+}
+
+@media screen and (min-width: 60em) {
+  .header {
+    padding-left: calc(5% + 2rem);
+    padding-right: calc(5% + 2rem);
+  }
 }
 
 .logo {
