@@ -2,6 +2,8 @@
 title: рассылки
 thumbnail: /project-1.png
 gallery:
+  - title: регулярка театр
+    image: /регулярка театр.gif
   - title: концерты
     image: /концерты.gif
   - title: валентинка с сюрпризом
