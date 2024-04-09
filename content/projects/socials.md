@@ -2,6 +2,8 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
+  - {}
+  - image: /623.png
   - title: чеховское
     image: /Frame 277131631.png
   - title: драматическое
