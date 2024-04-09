@@ -50,18 +50,21 @@ export const Sticker = ({ imageUrl, title, path }: Props) => {
     <div ref={ref} className={styles["sticker"]}>
       {
         path ? 
-        <Link href={path}>
+        <Link href={path} className={styles['sticker-link']}>
           <img
             src={imageUrl}
             alt={title}
             className={styles['image']}
           />
         </Link>
-        : <img
-            src={imageUrl}
-            alt={title}
-            className={styles['image']}
-          />
+        : 
+          <span className={styles['sticker-link']}>
+            <img
+              src={imageUrl}
+              alt={title}
+              className={styles['image']}
+            />
+          </span>
       }
     </div>
   );

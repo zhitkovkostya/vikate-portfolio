@@ -27,8 +27,13 @@
   z-index: 1020;
 }
 
-.logo-link:hover {
+.logo-link:hover,
+.logo-link:focus {
   animation: flicker 6s linear infinite;
+}
+
+.logo-link:focus {
+  outline: none;
 }
 
 .page-title {
@@ -47,15 +52,27 @@
     opacity: 25%;
     color: transparent;
     text-shadow:
-    0 0 0.3vw #ff0099,
-    0 0 0.521vw #ff0099;
+    0 0 0.3vw #fff,
+    0 0 0.521vw #fff,
+    0 0 1.094vw #fff,
+    0 0 2.188vw #ff0099,
+    0 0 4.271vw #ff0099,
+    0 0 4.792vw #ff0099,
+    0 0 5.313vw #ff0099,
+    0 0 7.865vw #ff0099;
   } 3.3% {
     /*3*/
     opacity: 25%;
     color: transparent;
     text-shadow:
-    0 0 0.3vw #ff0099,
-    0 0 0.521vw #ff0099;
+    0 0 0.3vw #fff,
+    0 0 0.521vw #fff,
+    0 0 1.094vw #fff,
+    0 0 2.188vw #ff0099,
+    0 0 4.271vw #ff0099,
+    0 0 4.792vw #ff0099,
+    0 0 5.313vw #ff0099,
+    0 0 7.865vw #ff0099;
   } 3.67% {
     /*2*/
   color: #fff;
