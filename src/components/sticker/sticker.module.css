@@ -9,6 +9,7 @@
   left: 50%;
   width: 200px;
   cursor: pointer;
+  transition: width 0.15s;
 }
 
 @media screen and (min-width: 60em) {

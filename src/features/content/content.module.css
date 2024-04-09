@@ -1,19 +1,19 @@
 .content {
-  padding: 8rem 2rem 0;
-  font-size: 3.2vw;
+  padding: 6rem 2rem 0;
+  font-size: 22px;
   font-weight: 300;
+  transition: all 0.15s;
 }
 
 @media screen and (min-width: 60em) {
   .content {
-    padding-left: calc(5% + 2rem);
-    padding-right: calc(5% + 2rem);
+    padding: 8rem calc(5% + 2rem) 0;
+    font-size: 3.2vw;
   }
 }
 
 @media screen and (min-width: 30em) and (max-width: 60em) {
   .content {
-    padding-top: 6rem;
     font-size: 36px;
   }
 }
