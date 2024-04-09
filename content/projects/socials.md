@@ -2,6 +2,8 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
+  - title: катя нв
+    image: /1470386853.png
   - title: черепаха
     image: /черепаха.png
   - title: факты о клубах
