@@ -2,6 +2,8 @@
 title: рассылки
 thumbnail: /project-1.png
 gallery:
+  - title: звёзды сошлись
+    image: /звезды сошлись.png
   - title: письмо 1
     image: /Desktop email.png
   - title: декабрь
