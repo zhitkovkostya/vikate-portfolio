@@ -2,6 +2,9 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
+  - {}
+  - title: черным черно
+    image: /cover66-1.png
   - title: нет монет
     image: /cover-5.png
   - title: мейби бейби
