@@ -48,12 +48,12 @@ export const Sticker = ({ imageUrl, title, path }: Props) => {
   });
 
   return (
-    <div ref={ref} className={styles["project-item"]}>
+    <div ref={ref} className={styles["sticker"]}>
       <Link href={path}>
         <img
           src={imageUrl}
           alt={title}
-          style={{ maxWidth: 300, maxHeight: 300 }}
+          className={styles['image']}
         />
       </Link>
     </div>
