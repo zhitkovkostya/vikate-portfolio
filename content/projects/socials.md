@@ -2,7 +2,8 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
-  - {}
+  - title: черепаха
+    image: /черепаха.png
   - title: факты о клубах
     image: /623.png
   - title: чеховское
