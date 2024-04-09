@@ -2,6 +2,8 @@
 title: соцсети
 thumbnail: /project-2.png
 gallery:
+  - title: ёлочка вик
+    image: /cover a.png
   - title: концерты в Петербурге
     image: /ооо.png
   - title: кауфман
