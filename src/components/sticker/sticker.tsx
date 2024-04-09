@@ -9,7 +9,7 @@ import Link from "next/link";
 type Props = {
   imageUrl: string;
   title: string;
-  path: string;
+  path?: string;
 };
 
 gsap.registerPlugin(useGSAP, Draggable);
@@ -49,13 +49,21 @@ export const Sticker = ({ imageUrl, title, path }: Props) => {
 
   return (
     <div ref={ref} className={styles["sticker"]}>
-      <Link href={path}>
-        <img
-          src={imageUrl}
-          alt={title}
-          className={styles['image']}
-        />
-      </Link>
+      {
+        path ? 
+        <Link href={path}>
+          <img
+            src={imageUrl}
+            alt={title}
+            className={styles['image']}
+          />
+        </Link>
+        : <img
+            src={imageUrl}
+            alt={title}
+            className={styles['image']}
+          />
+      }
     </div>
   );
 };

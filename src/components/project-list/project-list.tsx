@@ -14,7 +14,7 @@ export const ProjectList = ({ projects = [] }: Props) => {
           <ProjectItem
             imageUrl={thumbnail}
             title={title}
-            path={`/project/${slug}`}
+            path={slug ? `/project/${slug}` : undefined}
           />
         </div>
       ))}

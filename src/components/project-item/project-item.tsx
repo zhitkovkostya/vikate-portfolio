@@ -10,7 +10,7 @@ import { Sticker } from "../sticker";
 type Props = {
   imageUrl: string;
   title: string;
-  path: string;
+  path?: string;
 };
 
 gsap.registerPlugin(useGSAP, Draggable);

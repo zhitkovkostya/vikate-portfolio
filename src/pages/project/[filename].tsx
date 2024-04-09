@@ -30,7 +30,7 @@ const ProjectPage = (props: Props) => {
           projects={data?.project.gallery?.map((item) => ({
             thumbnail: item.image,
             title: item.title,
-            slug: item.title,
+            slug: undefined,
             gallery: [],
             body: [],
           }))}
