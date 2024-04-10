@@ -46,15 +46,6 @@ export const getStaticProps = async ({
 }: {
   params: { filename: string };
 }) => {
-  // let data = {
-  //   project: {
-  //     title: "",
-  //     thumbnail: "",
-  //     slug: "",
-  //     gallery: [],
-  //     body: [],
-  //   } as Project,
-  // };
   const variables = { relativePath: `${params.filename}.md` };
   const res = await client.queries?.project(variables);
   const globalVariables = { relativePath: `global.md` };
