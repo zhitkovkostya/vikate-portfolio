@@ -1,0 +1,1 @@
+export { fetchEntry as fetchPage } from './api';

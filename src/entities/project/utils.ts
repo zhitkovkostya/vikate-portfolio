@@ -1,13 +1,19 @@
 import { Asset, Entry } from "contentful";
-import { ProjectSkeleton } from "./types";
+import { Document } from '@contentful/rich-text-types';
 import { Project } from "@/types/project";
+import { ProjectSkeleton } from "./types";
 
-export const unpackProjects = (projects: Entry<ProjectSkeleton>[]): Project[] => {
-  return projects.map((projectEntry) => ({
+const unpackFile = (file: Asset) => {
+  return file.fields?.file?.url as string;
+};
+
+export const unpackProject = (projectEntry: Entry<ProjectSkeleton>): Project => {
+  return {
     title: projectEntry.fields.title as string,
     slug: projectEntry.fields.slug as string,
-    thumbnail: (projectEntry.fields.thumbnail as unknown as Asset).fields.file?.url as string,
-    body: '',
-    gallery: [],
-  }));
+    thumbnail: unpackFile(projectEntry.fields.thumbnail as unknown as Asset),
+    body:  projectEntry.fields.description as Document,
+    // @ts-ignore
+    gallery: projectEntry.fields.gallery.map(unpackFile).filter(Boolean) as string[],
+  };
 }

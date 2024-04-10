@@ -1,1 +1,4 @@
-export { fetchEntries } from './api';
+export {
+  fetchEntries as fetchProjects,
+  fetchEntry as fetchProject
+} from './api';

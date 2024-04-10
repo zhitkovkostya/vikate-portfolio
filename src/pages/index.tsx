@@ -1,12 +1,14 @@
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { ProjectList } from "@/components/project-list";
 import { Content } from "@/features/content";
-import { fetchEntries } from "@/entities/project";
+import { fetchProjects } from "@/entities/project";
+import { fetchPage } from "@/entities/page";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-export default function Home({ projects }: Props) {
+export default function Home({ data }: Props) {
   return (
     <>
       <Head>
@@ -17,20 +19,27 @@ export default function Home({ projects }: Props) {
       </Head>
       <main>
         <Content>
-          {/* <TinaMarkdown content={data.home.body} /> */}
+          {data.page?.body && documentToReactComponents(data.page?.body)}
         </Content>
-        {projects && <ProjectList projects={projects} />}
+        {data.projects && <ProjectList projects={data.projects} />}
       </main>
     </>
   );
 }
 
 export const getStaticProps = async () => {
-  const projects = await fetchEntries();
+  const projects = await fetchProjects();
+  const page = await fetchPage('home');
 
   return {
     props: {
-      projects,
+      data: {
+        projects,
+        page,
+        global: {
+          title: 'викатэ'
+        }
+      }
     },
   };
 };

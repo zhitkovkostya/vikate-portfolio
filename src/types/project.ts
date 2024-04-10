@@ -1,9 +1,9 @@
-import { TinaMarkdownContent } from "tinacms/dist/rich-text";
+import { Document } from '@contentful/rich-text-types'
 
 export type Project = {
   title: string;
   slug?: string;
   thumbnail: string;
-  gallery: { image: string; title: string }[];
-  body: TinaMarkdownContent | TinaMarkdownContent[];
+  gallery: string[];
+  body: Document;
 };

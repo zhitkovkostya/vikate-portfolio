@@ -2,30 +2,31 @@ import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { ProjectList } from "@/components/project-list";
 import { Project } from "@/types/project";
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Content } from "@/features/content";
+import { fetchProjects, fetchProject } from "@/entities/project";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const ProjectPage = (props: Props) => {
+const ProjectPage = ({ data }: Props) => {
+  debugger;
   return (
     <>
-      {/* <Head>
-        <title>{data?.project.title} | викатэ</title>
+      <Head>
+        <title>{data.project?.title} | викатэ</title>
       </Head>
       <main>
         <Content>
-          <TinaMarkdown content={data?.project.body} />
+          {data.project?.body && documentToReactComponents(data.project?.body)}
         </Content>
         <ProjectList
-          projects={data?.project.gallery?.map((item) => ({
-            thumbnail: item.image,
-            title: item.title,
+          projects={data.project?.gallery?.map((image) => ({
+            thumbnail: image,
+            title: '',
             slug: undefined,
-            gallery: [],
-            body: [],
-          }))}
+          })) as Project[]}
         />
-      </main> */}
+      </main>
     </>
   );
 };
@@ -35,36 +36,30 @@ export const getStaticProps = async ({
 }: {
   params: { filename: string };
 }) => {
-  // const variables = { relativePath: `${params.filename}.md` };
-  // const res = await client.queries?.project(variables);
-  // const globalVariables = { relativePath: `global.md` };
-  // const globalRes = await client.queries?.global(globalVariables);
-
-  
-
-  const props = {
-    // variables: res.variables,
-    // data: {
-    //   ...res.data,
-    //   ...globalRes.data,
-    // },
-    // query: res.query,
-  };
+  const project = await fetchProject(params.filename);
 
   return {
-    props,
+    props: {
+      data: {
+        project,
+        global: {
+          title: 'викатэ'
+        }
+      },
+    },
   };
 };
 
 export const getStaticPaths = async () => {
-  // const projectsListData = await client.queries.projectConnection();
+  const projects = await fetchProjects();
 
-  // return {
-  //   paths: projectsListData?.data?.projectConnection?.edges?.map((project) => ({
-  //     params: { filename: project?.node?._sys.filename },
-  //   })),
-  //   fallback: false,
-  // };
+  return {
+    paths: projects?.map((project) => ({
+      params: { filename: project.slug },
+    })),
+    fallback: false,
+  };
+
 };
 
 export default ProjectPage;

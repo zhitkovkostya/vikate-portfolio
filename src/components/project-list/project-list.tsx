@@ -3,7 +3,7 @@ import { ProjectItem } from "../project-item";
 import styles from "./project-list.module.css";
 
 type Props = {
-  projects: Project[];
+  projects: Pick<Project, 'slug' | 'thumbnail' | 'title'>[];
 };
 
 export const ProjectList = ({ projects = [] }: Props) => {
