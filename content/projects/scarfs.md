@@ -1,5 +1,5 @@
 ---
-title: шарфики
+title: шарфы
 thumbnail: /project-3.png
 gallery:
   - title: шарфик бестики
