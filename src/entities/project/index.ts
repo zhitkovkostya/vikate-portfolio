@@ -1,0 +1,1 @@
+export { fetchEntries } from './api';

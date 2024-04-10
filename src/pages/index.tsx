@@ -1,22 +1,12 @@
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { ProjectList } from "@/components/project-list";
-import client from "../../tina/__generated__/client";
-import { Project } from "@/types/project";
 import { Content } from "@/features/content";
-import { useTina } from "tinacms/dist/react";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { fetchEntries } from "@/entities/project";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-export default function Home(props: Props) {
-  const { data } = useTina({
-    // @ts-ignore
-    query: props.query,
-    variables: props.variables,
-    data: props.data,
-  })
-
+export default function Home({ projects }: Props) {
   return (
     <>
       <Head>
@@ -27,38 +17,20 @@ export default function Home(props: Props) {
       </Head>
       <main>
         <Content>
-          <TinaMarkdown content={data.home.body} />
+          {/* <TinaMarkdown content={data.home.body} /> */}
         </Content>
-        <ProjectList projects={props.data.projects} />
+        {projects && <ProjectList projects={projects} />}
       </main>
     </>
   );
 }
 
 export const getStaticProps = async () => {
-  const projectsRes = await client.queries?.projectConnection();
-  const projects =
-    projectsRes.data.projectConnection.edges?.map((project) => ({
-      slug: project?.node?._sys.filename ?? "",
-      title: project?.node?.title ?? "",
-      thumbnail: project?.node?.thumbnail ?? "",
-      body: [],
-      gallery: [],
-    })) ?? [] as Project[];
-  const homeVariables = { relativePath: `home.md` };
-  const homeRes = await client.queries?.pageWithGlobal(homeVariables);
-
-  const props = {
-    data: {
-      ...homeRes.data,
-      // ...globalRes.data,
-      projects,
-    },
-    query: homeRes.query,
-    variables: homeRes.variables,
-  };
+  const projects = await fetchEntries();
 
   return {
-    props,
+    props: {
+      projects,
+    },
   };
 };
