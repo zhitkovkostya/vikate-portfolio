@@ -7,7 +7,7 @@ gsap.registerPlugin(useGSAP, Draggable);
 
 export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
   const [isActive, setIsActive] = useState(false);
-  const position = useRef({x: 0, y: 0, rotation: 0})
+  const position = useRef({x: 0, y: 0, rotation: 0, width: 0})
 
   useGSAP(() => {
     if (ref.current) {
@@ -27,6 +27,7 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
         x: positionX,
         y: positionY,
         rotation: rotation,
+        width: imageWidth
       }
 
       gsap.to(ref.current, {
@@ -50,10 +51,6 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
       return;
     }
 
-    const containerHeight = window.screen.height;
-    const imageHeight = ref.current.clientHeight;
-    const top = containerHeight / 2;
-
     gsap.to(ref.current, {
       duration: 0.3,
       fade: true,
@@ -61,8 +58,9 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
       x: 0,
       y: 0,
       top: isActive ? `${position.current.y}%` : '3%',
-      left: isActive ? `${position.current.x}%` : '3%',
-      width: isActive ?  '200px' : '94%',
+      left: isActive ? `${position.current.x}%` : '50%',
+      transform: isActive ? 'translate3d(0, 0, 0)' : 'translate3d(-50%, 0, 0)',
+      width: isActive ?  position.current.width : '90%',
       ease: "power1.inOut",
       onStart() {
         if (ref.current){
