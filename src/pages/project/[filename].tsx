@@ -9,7 +9,6 @@ import { fetchProjects, fetchProject } from "@/entities/project";
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const ProjectPage = ({ data }: Props) => {
-  debugger;
   return (
     <>
       <Head>
