@@ -14,7 +14,7 @@ export default function Home({ data }: Props) {
       <Head>
         <title>портфолио | викатэ</title>
         <meta name="description" content="Проекты Вики Ткачевой" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>

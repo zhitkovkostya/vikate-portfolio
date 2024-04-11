@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styles from "./sticker.module.css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -41,9 +40,7 @@ export const Sticker = ({ imageUrl, title, path }: Props) => {
       });
 
       Draggable.create(ref.current, {
-        inertia: true,
         allowContextMenu: true,
-        dragResistance: 0.1,
       });
     }
   });
