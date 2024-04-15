@@ -1,17 +1,20 @@
 .header {
+  --h-padding: 2rem;
+  --z-index: 1020;
+  --border-bottom: 2px solid rgb(var(--foreground-rgb));
+
   position: fixed;
   display: flex;
   gap: 2rem;
   width: 100%;
-  padding: 1rem 2rem;
-  border-bottom: 2px solid;
-  border-color: rgb(var(--foreground-rgb));
+  padding: 1rem var(--h-padding);
+  border-bottom: var(--border-bottom);
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 @media screen and (min-width: 60em) {
   .header {
-    padding-left: calc(5% + 2rem);
-    padding-right: calc(5% + 2rem);
+    --h-padding: calc(5% + 2rem);
   }
 }
 
@@ -24,7 +27,7 @@
   font-weight: bold;
   color: rgb(var(--foreground-rgb));
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  z-index: 1020;
+  z-index: var(--z-index);
 }
 
 .logo-link:hover,
@@ -38,11 +41,78 @@
 
 .page-title {
   visibility: hidden;
+  position: absolute;
+  z-index: var(--z-index);
+}
+
+.menu {
+  margin-left: auto;
+  display: flex;
+}
+
+.menu-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: transparent;
+  border: none;
+  font-size: 0;
+  cursor: pointer;
+  z-index: var(--z-index);
+}
+
+.menu-icon {
+  width: 32px;
+}
+
+.menu-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  overflow-y: auto;
+  background-color: rgb(var(--background-rgb));
+  border-bottom: var(--border-bottom);
+  padding: 0 var(--h-padding) 1rem;
+  margin: 0;
+  list-style: none;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: none;
+  max-height: 50vh;
+}
+
+.menu-list--open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.menu-item {
+  padding: 0.5rem 0;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.menu-link {
+  color: #444444;
+}
+
+.menu-link:hover {
+  text-decoration: underline;
+  color: rgb(var(--foreground-rgb));
 }
 
 @media screen and (min-width: 30em) {
   .page-title {
     visibility: visible;
+    position: relative;
+  }
+
+  .menu-button {
+    font-size: 24px;
   }
 }
 

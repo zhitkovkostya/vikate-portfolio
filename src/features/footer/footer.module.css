@@ -19,6 +19,7 @@
 
 .social-link {
   font-size: 24px;
+  line-height: 32px;
   color: rgb(var(--foreground-rgb));
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   z-index: 1020;

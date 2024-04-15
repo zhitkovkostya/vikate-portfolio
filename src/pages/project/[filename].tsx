@@ -35,11 +35,13 @@ export const getStaticProps = async ({
 }: {
   params: { filename: string };
 }) => {
+  const projects = await fetchProjects();
   const project = await fetchProject(params.filename);
 
   return {
     props: {
       data: {
+        projects,
         project,
         global: {
           title: 'викатэ'
