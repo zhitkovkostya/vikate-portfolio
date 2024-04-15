@@ -10,6 +10,11 @@ export const Footer = () => {
         </Link>
       </span>
       <span className={styles['social']}>
+        <Link className={styles['social-link']} href="https://t.me/tkchv">
+          телеграм
+        </Link>
+      </span>
+      <span className={styles['social']}>
         <Link className={styles['social-link']} href="mailto:tkchv@bk.ru">
           почта
         </Link>

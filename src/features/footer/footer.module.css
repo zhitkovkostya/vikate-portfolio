@@ -1,4 +1,5 @@
 .footer {
+  overflow-x: auto;
   position: fixed;
   bottom: 0;
   display: flex;
