@@ -17,10 +17,10 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
       const containerHeight = window.screen.height;
 
       const maxX = ((containerWidth - imageWidth) / containerWidth) * 100;
-      const maxY = ((containerHeight - imageHeight) / containerHeight) * 100;
+      const maxY = ((containerHeight - imageHeight) / containerHeight) * 92;
 
       const positionX = gsap.utils.random(0, maxX);
-      const positionY = gsap.utils.random(0, maxY);
+      const positionY = gsap.utils.random(8, maxY);
       const rotation = gsap.utils.random(-25, 25);
 
       position.current = {
@@ -36,12 +36,17 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
         y: 0,
         top: `${positionY}%`,
         left: `${positionX}%`,
-        rotate: rotation
+        rotate: rotation,
       });
 
       Draggable.create(ref.current, {
+        type: 'x,y',
         allowContextMenu: true,
         dragResistance: 0.1,
+        onDragEnd() { 
+          position.current.x = Math.round(this.pointerX / containerWidth * 100);
+          position.current.y = Math.round(this.pointerY / containerHeight * 100);
+        }
       });
     }
   });
