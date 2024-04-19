@@ -3,7 +3,7 @@ import Head from "next/head";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { ProjectList } from "@/components/project-list";
 import { Content } from "@/features/content";
-import { fetchProjects } from "@/entities/project";
+import { fetchAllProjects } from "@/entities/project";
 import { fetchPage } from "@/entities/page";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
@@ -28,7 +28,7 @@ export default function Home({ data }: Props) {
 }
 
 export const getStaticProps = async () => {
-  const projects = await fetchProjects();
+  const projects = await fetchAllProjects();
   const page = await fetchPage('home');
 
   console.log(projects)

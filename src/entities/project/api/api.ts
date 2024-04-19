@@ -1,9 +1,9 @@
 import { client } from "@/lib/contentful"
 import { Project } from "@/types/project";
-import { ProjectSkeleton } from "./types";
 import { unpackProject } from "./utils";
+import { ProjectSkeleton } from "./types";
 
-export const fetchEntries = async (): Promise<Project[] | undefined> => {
+export const fetchAllProjects = async (): Promise<Project[] | undefined> => {
   const { items: projectEntries } = await client.getEntries<ProjectSkeleton>({
     content_type: 'project',
   });
@@ -15,7 +15,7 @@ export const fetchEntries = async (): Promise<Project[] | undefined> => {
   console.log(`Error getting Entries for Projects.`)
 };
 
-export const fetchEntry = async (slug: string): Promise<Project | undefined> => {
+export const fetchProject = async (slug: string): Promise<Project | undefined> => {
   const { items: projectEntries } = await client.getEntries<ProjectSkeleton>({
     content_type: 'project',
     'fields.slug[in]': [slug],

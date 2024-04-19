@@ -1,4 +1,4 @@
 export {
-  fetchEntries as fetchProjects,
-  fetchEntry as fetchProject
+  fetchAllProjects,
+  fetchProject
 } from './api';

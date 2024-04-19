@@ -4,7 +4,7 @@ import { ProjectList } from "@/components/project-list";
 import { Project } from "@/types/project";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Content } from "@/features/content";
-import { fetchProjects, fetchProject } from "@/entities/project";
+import { fetchAllProjects, fetchProject } from "@/entities/project";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -35,7 +35,7 @@ export const getStaticProps = async ({
 }: {
   params: { filename: string };
 }) => {
-  const projects = await fetchProjects();
+  const projects = await fetchAllProjects();
   const project = await fetchProject(params.filename);
 
   console.log(projects)
@@ -54,7 +54,7 @@ export const getStaticProps = async ({
 };
 
 export const getStaticPaths = async () => {
-  const projects = await fetchProjects();
+  const projects = await fetchAllProjects();
 
   return {
     paths: projects?.map((project) => ({
