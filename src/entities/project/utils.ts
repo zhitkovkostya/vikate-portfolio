@@ -9,11 +9,11 @@ const unpackFile = (file: Asset) => {
 
 export const unpackProject = (projectEntry: Entry<ProjectSkeleton>): Project => {
   return {
-    title: projectEntry.fields.title as string,
-    slug: projectEntry.fields.slug as string,
-    thumbnail: unpackFile(projectEntry.fields.thumbnail as unknown as Asset),
-    body:  projectEntry.fields.description as Document,
+    title: projectEntry.fields.title as string ?? '',
+    slug: projectEntry.fields.slug as string ?? '',
+    thumbnail: unpackFile(projectEntry.fields.thumbnail as unknown as Asset) ?? '',
+    body:  projectEntry.fields.description as Document ?? null,
     // @ts-ignore
-    gallery: projectEntry.fields.gallery.map(unpackFile).filter(Boolean) as string[],
+    gallery: projectEntry.fields.gallery.map(unpackFile).filter(Boolean) as string[] ?? [],
   };
 }

@@ -27,6 +27,7 @@
 
 .sticker .image {
   width: 100%;
+  display: flex;
 }
 
 .sticker-link:hover,

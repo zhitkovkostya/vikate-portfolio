@@ -38,6 +38,8 @@ export const getStaticProps = async ({
   const projects = await fetchProjects();
   const project = await fetchProject(params.filename);
 
+  console.log(projects)
+
   return {
     props: {
       data: {

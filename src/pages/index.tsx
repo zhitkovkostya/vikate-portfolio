@@ -31,6 +31,8 @@ export const getStaticProps = async () => {
   const projects = await fetchProjects();
   const page = await fetchPage('home');
 
+  console.log(projects)
+
   return {
     props: {
       data: {

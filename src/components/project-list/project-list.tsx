@@ -9,9 +9,9 @@ type Props = {
 export const ProjectList = ({ projects = [] }: Props) => {
   return (
     <div className={`${styles["project-list"]} project-list`}>
-      {projects.map(({ thumbnail, title, slug }) => (
+      {projects.map(({ thumbnail, title, slug }, index) => (
         <ProjectItem
-          key={slug}
+          key={index}
           imageUrl={thumbnail}
           title={title}
           path={slug ? `/project/${slug}` : undefined}
