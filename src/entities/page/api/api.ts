@@ -1,8 +1,8 @@
 import { client } from "@/lib/contentful"
-import { Page, PageSkeleton } from "./types";
-import { unpackPage } from "./utils";
+import { Page, PageSkeleton } from "../types";
+import { unpackPage } from "../utils";
 
-export const fetchEntry = async (slug: string): Promise<Page | undefined> => {
+export const fetchPage = async (slug: string): Promise<Page> => {
   const { items: pageEntries } = await client.getEntries<PageSkeleton>({
     content_type: 'page',
     'fields.slug[in]': [slug],
@@ -13,4 +13,9 @@ export const fetchEntry = async (slug: string): Promise<Page | undefined> => {
   }
   
   console.log(`Error getting Entries for Pages.`)
+
+  return {
+    slug: 'home',
+    body: null,
+  }
 };

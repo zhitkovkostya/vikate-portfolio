@@ -1,9 +1,8 @@
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { ProjectList } from "@/components/project-list";
 import { Content } from "@/features/content";
-import { fetchAllProjects } from "@/entities/project";
+import { fetchAllProjects, ProjectSticker } from "@/entities/project";
 import { fetchPage } from "@/entities/page";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
@@ -21,7 +20,14 @@ export default function Home({ data }: Props) {
         <Content>
           {data.page?.body && documentToReactComponents(data.page?.body)}
         </Content>
-        {data.projects && <ProjectList projects={data.projects} />}
+        {data.projects.map((project) => (
+          <ProjectSticker
+            key={project.slug}
+            title={project.title}
+            imageUrl={project.thumbnail}
+            path={`/project/${project.slug}`}
+          />
+        ))}
       </main>
     </>
   );
@@ -30,8 +36,6 @@ export default function Home({ data }: Props) {
 export const getStaticProps = async () => {
   const projects = await fetchAllProjects();
   const page = await fetchPage('home');
-
-  console.log(projects)
 
   return {
     props: {

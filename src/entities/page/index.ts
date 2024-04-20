@@ -1,1 +1,1 @@
-export { fetchEntry as fetchPage } from './api';
+export { fetchPage } from './api/api';

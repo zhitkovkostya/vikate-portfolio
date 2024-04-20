@@ -3,7 +3,7 @@ import "./globals.css";
 import type { AppProps } from "next/app";
 import { Header } from "@/features/header";
 import { Footer } from "@/features/footer";
-import { Project } from "@/types/project";
+import { Project } from "@/entities/project";
 
 const inter = Inter({ subsets: ["latin"] });
 

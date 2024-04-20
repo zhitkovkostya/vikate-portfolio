@@ -1,0 +1,1 @@
+export { WorkSticker } from './work-sticker';

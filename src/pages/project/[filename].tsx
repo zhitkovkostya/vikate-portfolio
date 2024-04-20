@@ -1,10 +1,10 @@
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
-import { ProjectList } from "@/components/project-list";
-import { Project } from "@/types/project";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Content } from "@/features/content";
 import { fetchAllProjects, fetchProject } from "@/entities/project";
+import { Work } from "@/types/work";
+import { WorkSticker } from "@/entities/work/work-sticker";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -18,13 +18,9 @@ const ProjectPage = ({ data }: Props) => {
         <Content>
           {data.project?.body && documentToReactComponents(data.project?.body)}
         </Content>
-        <ProjectList
-          projects={data.project?.gallery?.map((image) => ({
-            thumbnail: image,
-            title: '',
-            slug: undefined,
-          })) as Project[]}
-        />
+        {data.project?.works.map(({ title, thumbnail }) => (
+          <WorkSticker title={title} imageUrl={thumbnail} key={thumbnail} />
+        ))}
       </main>
     </>
   );
@@ -37,8 +33,6 @@ export const getStaticProps = async ({
 }) => {
   const projects = await fetchAllProjects();
   const project = await fetchProject(params.filename);
-
-  console.log(projects)
 
   return {
     props: {

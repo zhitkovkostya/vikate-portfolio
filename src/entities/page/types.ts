@@ -11,5 +11,5 @@ export type PageSkeleton = {
 
 export type Page = {
   slug: string;
-  body: Document;
+  body: Document | null;
 }

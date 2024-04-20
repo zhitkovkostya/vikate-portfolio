@@ -1,0 +1,1 @@
+export { ProjectSticker } from './project-sticker';

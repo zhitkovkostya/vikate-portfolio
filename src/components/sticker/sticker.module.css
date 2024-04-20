@@ -41,13 +41,13 @@
 
 .sticker-link {
   display: block;
+  border: none;
+  transition: filter 0.15s, transform 0.15s;
 }
 
 .sticker-link,
 .sticker[data-active="true"] .sticker-link:hover,
 .sticker[data-active="true"] .sticker-link:focus {
-  border: none;
-  transition: filter 0.15s, transform 0.15s;
   filter: drop-shadow(4px 0px 0 white) 
           drop-shadow(-4px 0px 0 white)
           drop-shadow(0px 4px 0 white)
