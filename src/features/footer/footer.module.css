@@ -26,6 +26,8 @@
   line-height: 32px;
   color: rgb(var(--foreground-rgb));
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  text-shadow: rgb(var(--background-rgb)) 0px 0px 8px;
+  user-select: none;
 }
 
 .social-link:hover,

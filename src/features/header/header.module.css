@@ -27,6 +27,8 @@
   font-weight: bold;
   color: rgb(var(--foreground-rgb));
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  text-shadow: rgb(var(--background-rgb)) 0px 0px 8px;
+  user-select: none;
 }
 
 .logo-link:hover,
@@ -46,6 +48,8 @@
 
 .page-title {
   display: none;
+  text-shadow: rgb(var(--background-rgb)) 0px 0px 8px;
+  user-select: none;
 }
 
 .menu-button {
@@ -61,10 +65,13 @@
 .menu-label {
   font-size: 24px;
   display: none;
+  user-select: none;
+  text-shadow: rgb(var(--background-rgb)) 0px 0px 8px;
 }
 
 .menu-icon {
   width: 32px;
+  filter: drop-shadow(0px 0px 8px rgb(var(--background-rgb)));
 }
 
 .menu-list {
