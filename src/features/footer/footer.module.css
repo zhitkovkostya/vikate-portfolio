@@ -1,4 +1,6 @@
 .footer {
+  --z-index: 3000;
+
   overflow-x: auto;
   position: fixed;
   bottom: 0;
@@ -8,6 +10,8 @@
   padding: 1rem 2rem;
   border-top: 2px solid;
   border-color: rgb(var(--foreground-rgb));
+  backdrop-filter: grayscale(0.5) blur(3px);
+  z-index: var(--z-index);
 }
 
 @media screen and (min-width: 60em) {
@@ -22,7 +26,6 @@
   line-height: 32px;
   color: rgb(var(--foreground-rgb));
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  z-index: 1020;
 }
 
 .social-link:hover,

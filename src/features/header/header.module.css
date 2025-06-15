@@ -1,6 +1,6 @@
 .header {
   --h-padding: 2rem;
-  --z-index: 1020;
+  --z-index: 3000;
   --border-bottom: 2px solid rgb(var(--foreground-rgb));
 
   position: fixed;
@@ -10,6 +10,12 @@
   padding: 1rem var(--h-padding);
   border-bottom: var(--border-bottom);
   transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  backdrop-filter: grayscale(0.5) blur(3px);
+  z-index: var(--z-index);
+}
+
+.header--with-menu {
+  background-color: rgb(var(--background-rgb));
 }
 
 @media screen and (min-width: 60em) {
@@ -27,27 +33,27 @@
   font-weight: bold;
   color: rgb(var(--foreground-rgb));
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  z-index: var(--z-index);
 }
 
 .logo-link:hover,
 .logo-link:focus {
   animation: flicker 6s linear infinite;
+  background-color: transparent;
 }
 
 .logo-link:focus {
   outline: none;
 }
 
-.page-title {
-  visibility: hidden;
-  position: absolute;
-  z-index: var(--z-index);
-}
-
 .menu {
   margin-left: auto;
   display: flex;
+}
+
+.page-title {
+  /* position: absolute;
+  overflow: hidden;
+  animation: marquee 5s linear infinite; */
 }
 
 .menu-button {
@@ -57,9 +63,12 @@
   gap: 1rem;
   background-color: transparent;
   border: none;
-  font-size: 0;
   cursor: pointer;
-  z-index: var(--z-index);
+}
+
+.menu-label {
+  font-size: 24px;
+  display: none;
 }
 
 .menu-icon {
@@ -111,8 +120,8 @@
     position: relative;
   }
 
-  .menu-button {
-    font-size: 24px;
+  .menu-label {
+    display: inline;
   }
 }
 

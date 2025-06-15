@@ -21,20 +21,24 @@ export const Header = ({siteTitle, pageTitle, menuItems}: Props) => {
   }, [router])
 
   return (
-    <header className={styles['header']}>
+    <header className={`${styles['header']} ${isMenuOpen ? styles['header--with-menu'] : ''}`}>
       <h1 className={styles['logo']}>
         <Link className={styles['logo-link']} href="/">
           {siteTitle}
         </Link>
       </h1>
+      <div>
       <h2 className={styles['page-title']}>{pageTitle}</h2>
+      </div>
       <nav ref={navRef} role="navigation" aria-label="Main menu" className={styles['menu']}>
         <button
           className={styles['menu-button']}
           aria-expanded={isMenuOpen ? 'true' : 'false'}
           onClick={handleClick}
         >
-          {isMenuOpen ? 'закрыть' : 'меню'}
+          <span className={styles['menu-label']}>
+            {isMenuOpen ? 'закрыть' : 'меню'}
+          </span>
           <svg
             className={styles['menu-icon']}
             focusable="false"
