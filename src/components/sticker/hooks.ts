@@ -113,7 +113,7 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
       y: 0,
       top: isActive ? `${position.current.y}%` : '10%',
       left: isActive ? `${position.current.x}%` : '50%',
-      transform: isActive ? 'translate3d(0, 0, 0)' : 'translate3d(-50%, 0, 0)',
+      xPercent: isActive ? 0 : -50,
       width: isActive ?  position.current.width : '90%',
       ease: 'power3.out',
       onStart() {
