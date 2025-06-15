@@ -42,6 +42,7 @@
 .sticker-link {
   display: block;
   border: none;
+  background-color: transparent;
   transition: filter 0.15s, transform 0.15s;
 }
 
