@@ -1,5 +1,5 @@
 .header {
-  --h-padding: 2rem;
+  --h-padding: 1rem;
   --z-index: 3000;
   --border-bottom: 2px solid rgb(var(--foreground-rgb));
 
@@ -16,12 +16,6 @@
 
 .header--with-menu {
   background-color: rgb(var(--background-rgb));
-}
-
-@media screen and (min-width: 60em) {
-  .header {
-    --h-padding: calc(5% + 2rem);
-  }
 }
 
 .logo {
@@ -51,9 +45,7 @@
 }
 
 .page-title {
-  /* position: absolute;
-  overflow: hidden;
-  animation: marquee 5s linear infinite; */
+  display: none;
 }
 
 .menu-button {
@@ -114,10 +106,19 @@
   color: rgb(var(--foreground-rgb));
 }
 
-@media screen and (min-width: 30em) {
+@media screen and (min-width: 60em) {
+  .header {
+    --h-padding: calc(5% + 2rem);
+  }
+
   .page-title {
-    visibility: visible;
-    position: relative;
+    display: inline;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .header {
+    --h-padding: calc(5% + 2rem);
   }
 
   .menu-label {

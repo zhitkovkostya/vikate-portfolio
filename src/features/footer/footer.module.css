@@ -1,4 +1,5 @@
 .footer {
+  --h-padding: 1rem;
   --z-index: 3000;
 
   overflow-x: auto;
@@ -7,17 +8,16 @@
   display: flex;
   gap: 2rem;
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem var(--h-padding);
   border-top: 2px solid;
   border-color: rgb(var(--foreground-rgb));
   backdrop-filter: grayscale(0.5) blur(3px);
   z-index: var(--z-index);
 }
 
-@media screen and (min-width: 60em) {
+@media screen and (min-width: 30em) {
   .footer {
-    padding-left: calc(5% + 2rem);
-    padding-right: calc(5% + 2rem);
+    --h-padding: calc(5% + 2rem);
   }
 }
 

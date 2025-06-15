@@ -14,26 +14,37 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
     if (!ref.current) {
       return;
     }
-
+  
     const img = ref.current.querySelector('img');
-    
+
+  
     if (!img) {
+      console.error('No <img> element found!');
+
       return;
     }
+  
+    const handleLoad = () => setIsLoaded(true);
     
-    img.onload = () => setIsLoaded(true);
+    if (img.complete) {
+      setIsLoaded(true);
 
+      return;
+    }
+  
+    img.addEventListener('load', handleLoad);
+  
     return () => {
-      img.onload = null;
+      img.removeEventListener('load', handleLoad);
     };
   }, [ref]);
 
   useGSAP(() => {
-    if (ref.current) {
+    if (ref.current && isLoaded) {
       const imageWidth = ref.current.clientWidth;
       const imageHeight = ref.current.clientHeight;
-      const containerWidth = window.screen.width;
-      const containerHeight = window.screen.height;
+      const containerWidth = window.innerWidth;
+      const containerHeight = window.innerHeight;
 
       const maxX = ((containerWidth - imageWidth) / containerWidth) * 100;
       const maxY = ((containerHeight - imageHeight) / containerHeight) * 92;
@@ -64,6 +75,10 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
         dragResistance: 0.1,
         touchAction: 'none',
         onDragEnd() { 
+          if (!ref.current || !isLoaded) {
+            return;
+          }
+
           const rect = ref.current?.getBoundingClientRect();
           
           if (!rect) {
@@ -79,10 +94,10 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
         draggable.forEach(instance => instance.kill());
       };
     }    
-  }, [ref]);
+  }, [ref, isLoaded]);
 
   const onClick = () => {
-    if (!ref.current) {
+    if (!ref.current || !isLoaded) {
       return;
     }
 
@@ -102,7 +117,7 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
       width: isActive ?  position.current.width : '90%',
       ease: "power1.inOut",
       onStart() {
-        if (!ref.current) {
+        if (!ref.current || !isLoaded) {
           return;
         }
 
