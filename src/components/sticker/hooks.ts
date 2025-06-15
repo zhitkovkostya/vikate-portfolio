@@ -1,4 +1,4 @@
-import { RefObject, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Draggable from "gsap/dist/Draggable";
 import { useGSAP } from "@gsap/react";
@@ -7,7 +7,26 @@ gsap.registerPlugin(useGSAP, Draggable);
 
 export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
   const [isActive, setIsActive] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const position = useRef({x: 0, y: 0, rotation: 0, width: 0})
+
+  useEffect(() => {
+    if (!ref.current) {
+      return;
+    }
+
+    const img = ref.current.querySelector('img');
+    
+    if (!img) {
+      return;
+    }
+    
+    img.onload = () => setIsLoaded(true);
+
+    return () => {
+      img.onload = null;
+    };
+  }, [ref]);
 
   useGSAP(() => {
     if (ref.current) {
