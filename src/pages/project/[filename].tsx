@@ -1,9 +1,9 @@
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { Body } from "@/features/body";
 import { Content } from "@/features/content";
 import { fetchAllProjects, fetchProject } from "@/entities/project";
-import { Work } from "@/types/work";
 import { WorkSticker } from "@/entities/work/work-sticker";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
@@ -14,14 +14,14 @@ const ProjectPage = ({ data }: Props) => {
       <Head>
         <title>{data.project?.title} | викатэ</title>
       </Head>
-      <main>
+      <Body>
         <Content>
           {data.project?.body && documentToReactComponents(data.project?.body)}
         </Content>
         {data.project?.works.map(({ title, thumbnail }) => (
           <WorkSticker title={title} imageUrl={thumbnail} key={thumbnail} />
         ))}
-      </main>
+      </Body>
     </>
   );
 };

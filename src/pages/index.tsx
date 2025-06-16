@@ -1,6 +1,7 @@
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { Body } from "@/features/body";
 import { Content } from "@/features/content";
 import { fetchAllProjects, ProjectSticker } from "@/entities/project";
 import { fetchPage } from "@/entities/page";
@@ -16,7 +17,7 @@ export default function Home({ data }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <Body>
         <Content>
           {data.page?.body && documentToReactComponents(data.page?.body)}
         </Content>
@@ -28,7 +29,7 @@ export default function Home({ data }: Props) {
             path={`/project/${project.slug}`}
           />
         ))}
-      </main>
+      </Body>
     </>
   );
 }
