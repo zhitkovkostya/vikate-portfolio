@@ -3,6 +3,7 @@
   font-size: 22px;
   font-weight: 300;
   transition: all 0.15s;
+  user-select: none;
 }
 
 @media screen and (min-width: 60em) {
