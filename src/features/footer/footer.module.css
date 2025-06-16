@@ -11,7 +11,7 @@
   padding: 1rem var(--h-padding);
   border-top: 2px solid;
   border-color: rgb(var(--background-rgb));
-  backdrop-filter: grayscale(0.5) blur(3px);
+  backdrop-filter: grayscale(0.5) blur(4px);
   mix-blend-mode: difference;
   z-index: var(--z-index);
 }
