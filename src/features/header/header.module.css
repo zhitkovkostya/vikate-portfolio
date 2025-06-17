@@ -7,17 +7,14 @@
   gap: 2rem;
   width: 100%;
   padding: 1rem var(--h-padding);
-  border-bottom: 2px solid rgb(var(--background-rgb));
+  border-bottom: 2px solid rgb(var(--foreground-rgb));
   transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
   backdrop-filter: grayscale(0.5) blur(4px);
-  background-color: rgb(var(--foreground-rgb));
-  mix-blend-mode: difference;
-  mix-blend-mode: difference;
   z-index: var(--z-index);
 }
 
 .header--with-menu {
-  background-color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-rgb));
   backdrop-filter: grayscale(0.5) blur(16px);
 }
 
@@ -28,9 +25,10 @@
 .logo-link {
   font-size: 24px;
   font-weight: bold;
-  color: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   user-select: none;
+  text-shadow: 0 0 20px rgb(var(--background-rgb));
 }
 
 .logo-link:hover,
@@ -50,7 +48,7 @@
 
 .page-title {
   display: none;
-  color: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
   user-select: none;
 }
 
@@ -68,12 +66,14 @@
   font-size: 24px;
   display: none;
   user-select: none;
-  color: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
+  text-shadow: 0 0 20px rgb(var(--background-rgb));
 }
 
 .menu-icon {
   width: 32px;
-  fill: rgb(var(--background-rgb));
+  fill: rgb(var(--foreground-rgb));
+  filter: drop-shadow(0 0 12px rgb(var(--background-rgb)));
 }
 
 .menu-list {
@@ -145,153 +145,153 @@
     opacity: 25%;
     color: transparent;
     text-shadow:
-    0 0 0.3vw rgb(var(--foreground-rgb)),
-    0 0 0.521vw rgb(var(--foreground-rgb)),
-    0 0 1.094vw rgb(var(--foreground-rgb)),
-    0 0 2.188vw #00bd74,
-    0 0 4.271vw #00bd74,
-    0 0 4.792vw #00bd74,
-    0 0 5.313vw #00bd74,
-    0 0 7.865vw #00bd74;
+    0 0 0.3vw rgb(var(--background-rgb)),
+    0 0 0.521vw rgb(var(--background-rgb)),
+    0 0 1.094vw rgb(var(--background-rgb)),
+    0 0 2.188vw #ff0099,
+    0 0 4.271vw #ff0099,
+    0 0 4.792vw #ff0099,
+    0 0 5.313vw #ff0099,
+    0 0 7.865vw #ff0099;
   } 3.3% {
     /*3*/
     opacity: 25%;
     color: transparent;
     text-shadow:
-    0 0 0.3vw rgb(var(--foreground-rgb)),
-    0 0 0.521vw rgb(var(--foreground-rgb)),
-    0 0 1.094vw rgb(var(--foreground-rgb)),
-    0 0 2.188vw #00bd74,
-    0 0 4.271vw #00bd74,
-    0 0 4.792vw #00bd74,
-    0 0 5.313vw #00bd74,
-    0 0 7.865vw #00bd74;
+    0 0 0.3vw rgb(var(--background-rgb)),
+    0 0 0.521vw rgb(var(--background-rgb)),
+    0 0 1.094vw rgb(var(--background-rgb)),
+    0 0 2.188vw #ff0099,
+    0 0 4.271vw #ff0099,
+    0 0 4.792vw #ff0099,
+    0 0 5.313vw #ff0099,
+    0 0 7.865vw #ff0099;
   } 3.67% {
     /*2*/
-  color: rgb(var(--foreground-rgb));
+  color: rgb(var(--background-rgb));
   text-shadow:
-    0 0 0.3vw rgb(var(--foreground-rgb)),
-    0 0 0.521vw rgb(var(--foreground-rgb)),
-    0 0 1.094vw rgb(var(--foreground-rgb)),
-    0 0 2.188vw #00bd74,
-    0 0 4.271vw #00bd74,
-    0 0 4.792vw #00bd74,
-    0 0 5.313vw #00bd74,
-    0 0 7.865vw #00bd74;
+    0 0 0.3vw rgb(var(--background-rgb)),
+    0 0 0.521vw rgb(var(--background-rgb)),
+    0 0 1.094vw rgb(var(--background-rgb)),
+    0 0 2.188vw #ff0099,
+    0 0 4.271vw #ff0099,
+    0 0 4.792vw #ff0099,
+    0 0 5.313vw #ff0099,
+    0 0 7.865vw #ff0099;
   } 10% {
     /*1*/
     opacity: 75%;
-    color: rgb(var(--foreground-rgb));
+    color: rgb(var(--background-rgb));
     text-shadow:
-      0 0 1vw #00bd74,
-      0 0 2vw #00bd74,
-      0 0 2.5vw #00bd74,
-      0 0 3vw #00bd74,
-      0 0 4vw #00bd74;
+      0 0 1vw #ff0099,
+      0 0 2vw #ff0099,
+      0 0 2.5vw #ff0099,
+      0 0 3vw #ff0099,
+      0 0 4vw #ff0099;
   } 36.7% {
     /*1*/
     opacity: 75%;
-    color: rgb(var(--foreground-rgb));
+    color: rgb(var(--background-rgb));
     text-shadow:
-      0 0 1vw #00bd74,
-      0 0 2vw #00bd74,
-      0 0 2.5vw #00bd74,
-      0 0 3vw #00bd74,
-      0 0 4vw #00bd74;
+      0 0 1vw #ff0099,
+      0 0 2vw #ff0099,
+      0 0 2.5vw #ff0099,
+      0 0 3vw #ff0099,
+      0 0 4vw #ff0099;
   } 37.3% {
     /*3*/
     opacity: 25%;
     color: transparent;
     text-shadow:
-    0 0 0.3vw #00bd74,
-    0 0 0.521vw #00bd74;
+    0 0 0.3vw #ff0099,
+    0 0 0.521vw #ff0099;
   } 38% {
     /*1*/
     opacity: 75%;
-    color: rgb(var(--foreground-rgb));
+    color: rgb(var(--background-rgb));
     text-shadow:
-      0 0 1vw #00bd74,
-      0 0 2vw #00bd74,
-      0 0 2.5vw #00bd74,
-      0 0 3vw #00bd74,
-      0 0 4vw #00bd74;
+      0 0 1vw #ff0099,
+      0 0 2vw #ff0099,
+      0 0 2.5vw #ff0099,
+      0 0 3vw #ff0099,
+      0 0 4vw #ff0099;
   } 40.67% {
     /*3*/
     opacity: 25%;
     color: transparent;
     text-shadow:
-    0 0 0.3vw #00bd74,
-    0 0 0.521vw #00bd74;
+    0 0 0.3vw #ff0099,
+    0 0 0.521vw #ff0099;
   } 41.33% {
     /*1*/
     opacity: 75%;
-    color: rgb(var(--foreground-rgb));
+    color: rgb(var(--background-rgb));
     text-shadow:
-      0 0 1vw #00bd74,
-      0 0 2vw #00bd74,
-      0 0 2.5vw #00bd74,
-      0 0 3vw #00bd74,
-      0 0 4vw #00bd74;
+      0 0 1vw #ff0099,
+      0 0 2vw #ff0099,
+      0 0 2.5vw #ff0099,
+      0 0 3vw #ff0099,
+      0 0 4vw #ff0099;
   } 60% {
     /*2*/
-  color: rgb(var(--foreground-rgb));
+  color: rgb(var(--background-rgb));
   text-shadow:
-    0 0 0.3vw rgb(var(--foreground-rgb)),
-    0 0 0.521vw rgb(var(--foreground-rgb)),
-    0 0 1.094vw rgb(var(--foreground-rgb)),
-    0 0 2.188vw #00bd74,
-    0 0 4.271vw #00bd74,
-    0 0 4.792vw #00bd74,
-    0 0 5.313vw #00bd74,
-    0 0 7.865vw #00bd74;
+    0 0 0.3vw rgb(var(--background-rgb)),
+    0 0 0.521vw rgb(var(--background-rgb)),
+    0 0 1.094vw rgb(var(--background-rgb)),
+    0 0 2.188vw #ff0099,
+    0 0 4.271vw #ff0099,
+    0 0 4.792vw #ff0099,
+    0 0 5.313vw #ff0099,
+    0 0 7.865vw #ff0099;
   } 80% {
     /*1*/
     opacity: 75%;
-    color: rgb(var(--foreground-rgb));
+    color: rgb(var(--background-rgb));
     text-shadow:
-      0 0 1vw #00bd74,
-      0 0 2vw #00bd74,
-      0 0 2.5vw #00bd74,
-      0 0 3vw #00bd74,
-      0 0 4vw #00bd74;
+      0 0 1vw #ff0099,
+      0 0 2vw #ff0099,
+      0 0 2.5vw #ff0099,
+      0 0 3vw #ff0099,
+      0 0 4vw #ff0099;
   } 93.3% {
     /*2*/
-  color: rgb(var(--foreground-rgb));
+  color: rgb(var(--background-rgb));
   text-shadow:
-    0 0 0.3vw rgb(var(--foreground-rgb)),
-    0 0 0.521vw rgb(var(--foreground-rgb)),
-    0 0 1.094vw rgb(var(--foreground-rgb)),
-    0 0 2.188vw #00bd74,
-    0 0 4.271vw #00bd74,
-    0 0 4.792vw #00bd74,
-    0 0 5.313vw #00bd74,
-    0 0 7.865vw #00bd74;
+    0 0 0.3vw rgb(var(--background-rgb)),
+    0 0 0.521vw rgb(var(--background-rgb)),
+    0 0 1.094vw rgb(var(--background-rgb)),
+    0 0 2.188vw #ff0099,
+    0 0 4.271vw #ff0099,
+    0 0 4.792vw #ff0099,
+    0 0 5.313vw #ff0099,
+    0 0 7.865vw #ff0099;
   } 93.5% {
     /*1*/
     opacity: 75%;
-    color: rgb(var(--foreground-rgb));
+    color: rgb(var(--background-rgb));
     text-shadow:
-      0 0 1vw #00bd74,
-      0 0 2vw #00bd74,
-      0 0 2.5vw #00bd74,
-      0 0 3vw #00bd74,
-      0 0 4vw #00bd74;
+      0 0 1vw #ff0099,
+      0 0 2vw #ff0099,
+      0 0 2.5vw #ff0099,
+      0 0 3vw #ff0099,
+      0 0 4vw #ff0099;
   } 98% {
     /*3*/
     opacity: 25%;
     color: transparent;
     text-shadow:
-    0 0 0.3vw #00bd74,
-    0 0 0.521vw #00bd74;
+    0 0 0.3vw #ff0099,
+    0 0 0.521vw #ff0099;
   } 100% {
     /*1*/
     opacity: 75%;
-    color: rgb(var(--foreground-rgb));
+    color: rgb(var(--background-rgb));
     text-shadow:
-      0 0 1vw #00bd74,
-      0 0 2vw #00bd74,
-      0 0 2.5vw #00bd74,
-      0 0 3vw #00bd74,
-      0 0 4vw #00bd74;
+      0 0 1vw #ff0099,
+      0 0 2vw #ff0099,
+      0 0 2.5vw #ff0099,
+      0 0 3vw #ff0099,
+      0 0 4vw #ff0099;
   }
 }
