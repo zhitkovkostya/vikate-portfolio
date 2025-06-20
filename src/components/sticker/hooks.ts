@@ -46,8 +46,11 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
       const containerWidth = window.innerWidth;
       const containerHeight = window.innerHeight;
 
+      
       const maxX = ((containerWidth - imageWidth) / containerWidth) * 100;
       const maxY = ((containerHeight - imageHeight) / containerHeight) * 92;
+      
+      console.log({containerWidth, containerHeight, maxX, maxY, imageWidth, imageHeight, image: ref.current});
 
       const positionX = gsap.utils.random(0, maxX);
       const positionY = gsap.utils.random(8, maxY);
