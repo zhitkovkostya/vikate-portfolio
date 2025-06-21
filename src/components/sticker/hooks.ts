@@ -58,16 +58,13 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
     }
 
     const screenWidth = window.innerWidth;
-    const imageRect = ref.current.getBoundingClientRect();
-    const currentImageWidth = imageRect.width;
-    const currentImageHeight = imageRect.height;
     const newImageWidth = screenWidth * 0.9;
 
-    initialConfigRef.current.height = currentImageHeight;
-    initialConfigRef.current.width = currentImageWidth;
-    initialConfigRef.current.top = imageRect.top;
-    initialConfigRef.current.left = imageRect.left;
-    initialConfigRef.current.rotation = 0;
+    initialConfigRef.current.height = ref.current.offsetHeight;
+    initialConfigRef.current.width = ref.current.offsetWidth;
+    initialConfigRef.current.top = ref.current.offsetTop;
+    initialConfigRef.current.left = ref.current.offsetLeft;
+    initialConfigRef.current.rotation = gsap.utils.random(-20, 20);
     
     gsap.to(ref.current, {
       top: '15%',
@@ -114,7 +111,6 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
 
   return {
     onClick,
-    isExpanded,
   }
 }
 

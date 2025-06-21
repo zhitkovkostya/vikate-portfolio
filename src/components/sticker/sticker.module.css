@@ -4,6 +4,7 @@
   left: 0;
   width: 150px;
   cursor: pointer;
+  transform-origin: center;
 }
 
 @media screen and (min-width: 90em) {

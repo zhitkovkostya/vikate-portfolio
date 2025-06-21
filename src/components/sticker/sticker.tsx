@@ -6,7 +6,7 @@ import { Props } from "./types";
 
 export const Sticker = ({ imageUrl, title, path }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { onClick, isExpanded } = useExpand(ref);
+  const { onClick } = useExpand(ref);
   useRandomPosition(ref);
   useDraggable(ref);
 
