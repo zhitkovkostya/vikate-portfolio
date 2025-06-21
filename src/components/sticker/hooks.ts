@@ -40,11 +40,15 @@ export const useRandomPosition = (ref: RefObject<HTMLDivElement>) => {
       ...centeredConfig,
     });
 
-    gsap.to(ref.current, {
+    const tween = gsap.to(ref.current, {
       ...randomConfig,
       duration: 0.6,
       ease: 'power2.out',
     });
+
+    return () => {
+      tween.kill();
+    };
   }, [ref]);
 }
 
@@ -66,6 +70,8 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
     initialConfigRef.current.left = ref.current.offsetLeft;
     initialConfigRef.current.rotation = gsap.utils.random(-20, 20);
     
+    gsap.killTweensOf(ref.current);
+
     gsap.to(ref.current, {
       top: '15%',
       left: '5%',
@@ -74,9 +80,7 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
       height: 'auto',
       duration: 0.6,
       ease: 'power2.in',
-      onComplete: function() {
-        this.attr = { ["data-expanded"]: 'true' };
-      }
+      attr: { ["data-expanded"]: 'true' }
     });
 
     setExpanded(true);
@@ -86,14 +90,14 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
     if (!ref.current || !isExpanded) {
       return;
     }
+
+    gsap.killTweensOf(ref.current);
   
     gsap.to(ref.current, {
       ...initialConfigRef.current,
       duration: 0.6,
       ease: 'power2.out',
-      onComplete: function() {
-        this.attr = { ["data-expanded"]: 'false' };
-      }
+      attr: { ["data-expanded"]: 'false' }
     });
 
     setExpanded(false);
@@ -118,11 +122,21 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
   const draggableRef = useRef<Draggable | null>(null);
 
   useEffect(() => {
-    draggableRef.current = Draggable.create(ref.current, {
+    if (!ref.current) {
+      return;
+    }
+
+    const draggable = Draggable.create(ref.current, {
       type: 'top,left',
       allowContextMenu: false,
       dragResistance: 0.1,
       touchAction: 'none',
     })[0];
+
+    draggableRef.current = draggable;
+
+    return () => {
+      draggable.kill();
+    };
   }, [ref]);
 }
