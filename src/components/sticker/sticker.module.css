@@ -47,8 +47,8 @@
 }
 
 .sticker-link,
-.sticker[data-active="true"] .sticker-link:hover,
-.sticker[data-active="true"] .sticker-link:focus {
+.sticker[data-expanded="true"] .sticker-link:hover,
+.sticker[data-expanded="true"] .sticker-link:focus {
   filter: drop-shadow(4px 0px 0 white) 
           drop-shadow(-4px 0px 0 white)
           drop-shadow(0px 4px 0 white)
@@ -66,7 +66,7 @@
   transform-origin: center center;
 }
 
-[data-active="true"] .sticker-link:hover,
-[data-active="true"] .sticker-link:focus {
-  transform: scale(0.99);
+[data-expanded="true"] .sticker-link:hover,
+[data-expanded="true"] .sticker-link:focus {
+  transform: scale(1);
 }

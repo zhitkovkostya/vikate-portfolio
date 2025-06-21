@@ -6,14 +6,7 @@ import { useOnClickOutside } from "@/lib/layout";
 
 gsap.registerPlugin(useGSAP, Draggable);
 
-const useInitialConfig = (ref: RefObject<HTMLDivElement>) => {
-  const initialConfigRef = useRef({top: 0, left: 0, rotation: 0, width: 0, height: 0});
-
-  return { initialConfigRef };
-}
-
 export const useRandomPosition = (ref: RefObject<HTMLDivElement>) => {
-  const { initialConfigRef } = useInitialConfig(ref);
  
   useEffect(() => {
     if (!ref.current) {
@@ -22,16 +15,15 @@ export const useRandomPosition = (ref: RefObject<HTMLDivElement>) => {
 
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    const imageRect = ref.current.getBoundingClientRect();
-    const imageWidth = imageRect.width;
-    const imageHeight = imageRect.height;
+    const imageWidth = ref.current.clientWidth;
+    const imageHeight = ref.current.clientHeight;
     const minLeft = imageWidth * 0.15;
     const maxLeft = screenWidth - (imageWidth * 1.15);
     const minTop = imageHeight * 0.15;
     const maxTop = screenHeight - (imageHeight * 1.15);
     const randomLeft = gsap.utils.random(minLeft, maxLeft);
     const randomTop = gsap.utils.random(minTop, maxTop);
-    const randomRotation = gsap.utils.random(0, 0);
+    const randomRotation = gsap.utils.random(-20, 20);
     const randomConfig = {
       top: randomTop,
       left: randomLeft,
@@ -50,13 +42,15 @@ export const useRandomPosition = (ref: RefObject<HTMLDivElement>) => {
 
     gsap.to(ref.current, {
       ...randomConfig,
+      duration: 0.6,
+      ease: 'power2.out',
     });
-  }, [initialConfigRef, ref]);
+  }, [ref]);
 }
 
 export const useExpand = (ref: RefObject<HTMLDivElement>) => {
+  const initialConfigRef = useRef<gsap.TweenVars>({top: 0, left: 0, rotation: 0, width: 0, height: 0});
   const [isExpanded, setExpanded] = useState(false);
-  const { initialConfigRef } = useInitialConfig(ref);
 
   const expand = () => {
     if (!ref.current) {
@@ -68,26 +62,26 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
     const currentImageWidth = imageRect.width;
     const currentImageHeight = imageRect.height;
     const newImageWidth = screenWidth * 0.9;
-    const centerCoords = {
+
+    initialConfigRef.current.height = currentImageHeight;
+    initialConfigRef.current.width = currentImageWidth;
+    initialConfigRef.current.top = imageRect.top;
+    initialConfigRef.current.left = imageRect.left;
+    initialConfigRef.current.rotation = 0;
+    
+    gsap.to(ref.current, {
       top: '15%',
       left: '5%',
       rotation: 0,
-    }
-
-    initialConfigRef.current = {
-      width: currentImageWidth,
-      height: currentImageHeight,
-      top: imageRect.top,
-      left: imageRect.left,
-      rotation: 0,
-    }
-  
-    gsap.to(ref.current, {
-      ...centerCoords,
       width: newImageWidth,
       height: 'auto',
+      duration: 0.6,
+      ease: 'power2.in',
+      onComplete: function() {
+        this.attr = { ["data-expanded"]: 'true' };
+      }
     });
-    
+
     setExpanded(true);
   }
   
@@ -95,11 +89,14 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
     if (!ref.current || !isExpanded) {
       return;
     }
-
-    console.log(initialConfigRef.current);
   
     gsap.to(ref.current, {
       ...initialConfigRef.current,
+      duration: 0.6,
+      ease: 'power2.out',
+      onComplete: function() {
+        this.attr = { ["data-expanded"]: 'false' };
+      }
     });
 
     setExpanded(false);
@@ -117,12 +114,12 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
 
   return {
     onClick,
+    isExpanded,
   }
 }
 
 export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
   const draggableRef = useRef<Draggable | null>(null);
-  const { initialConfigRef } = useInitialConfig(ref);
 
   useEffect(() => {
     draggableRef.current = Draggable.create(ref.current, {
@@ -130,22 +127,6 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
       allowContextMenu: false,
       dragResistance: 0.1,
       touchAction: 'none',
-      onDragEnd() { 
-        if (!ref.current) {
-          return;
-        }
-
-        const imageRect = ref.current.getBoundingClientRect();
-        
-        if (!imageRect) {
-          return;
-        }
-
-        // initialConfigRef.current.top = imageRect.top;
-        // initialConfigRef.current.left = imageRect.left;
-
-        // console.log(initialConfigRef.current);
-      },
     })[0];
-  }, [initialConfigRef, ref]);
+  }, [ref]);
 }

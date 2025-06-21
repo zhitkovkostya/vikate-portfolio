@@ -1,13 +1,12 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import { useDraggable, useExpand, useRandomPosition } from "./hooks";
 import styles from "./sticker.module.css";
 import { Props } from "./types";
-import { useOnClickOutside } from "@/lib/layout";
 
 export const Sticker = ({ imageUrl, title, path }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { onClick } = useExpand(ref);
+  const { onClick, isExpanded } = useExpand(ref);
   useRandomPosition(ref);
   useDraggable(ref);
 
