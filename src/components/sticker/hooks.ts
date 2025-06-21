@@ -8,49 +8,59 @@ gsap.registerPlugin(useGSAP, Draggable);
 
 export const useRandomPosition = (ref: RefObject<HTMLDivElement>) => {
   useEffect(() => {
-    if (!ref.current) {
-      return;
-    }
+    const timeoutId = setTimeout(() => {
+      if (!ref.current) return;
 
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    const imageWidth = ref.current.clientWidth;
-    const imageHeight = ref.current.clientHeight;
-    const minLeft = imageWidth * 0.15;
-    const minTop = imageHeight * 0.15;
-    const maxLeft = screenWidth - (imageWidth * 1.15);
-    const maxTop = screenHeight - (imageHeight * 1.15);
-    const randomLeft = gsap.utils.random(minLeft, maxLeft);
-    const randomTop = gsap.utils.random(minTop, maxTop);
-    const randomRotation = gsap.utils.random(-20, 20);
-    const randomConfig = {
-      top: randomTop,
-      left: randomLeft,
-      rotation: randomRotation,
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      const imageWidth = ref.current.clientWidth;
+      const imageHeight = ref.current.clientHeight;
+
+      const minLeft = imageWidth * 0.15;
+      const minTop = imageHeight * 0.15;
+      const maxLeft = screenWidth - (imageWidth * 1.15);
+      const maxTop = screenHeight - (imageHeight * 1.15);
+
+      const randomLeft = gsap.utils.random(minLeft, maxLeft);
+      const randomTop = gsap.utils.random(minTop, maxTop);
+      const randomRotation = gsap.utils.random(-20, 20);
+
+      const centeredConfig = {
+        top: (screenHeight / 2) - (imageHeight / 2),
+        left: (screenWidth / 2) - (imageWidth / 2),
+        rotation: 0,
+      };
+
+      gsap.set(ref.current, {
+        ...centeredConfig,
+        opacity: 0,
+      });
+
+      const tween = gsap.to(ref.current, {
+        top: randomTop,
+        left: randomLeft,
+        rotation: randomRotation,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power2.out',
+      });
+
+      cleanupTweenRef.current = tween;
+    }, 0);
+
+    const cleanupTweenRef = {
+      current: null as gsap.core.Tween | null,
     };
-    const centeredConfig = {
-      top: (screenHeight / 2) - (imageHeight  / 2),
-      left: (screenWidth / 2) - (imageWidth / 2),
-      rotation: 0,
-    };
-
-    gsap.set(ref.current, {
-      ...centeredConfig,
-      opacity: 0,
-    });
-
-    const tween = gsap.to(ref.current, {
-      ...randomConfig,
-      opacity: 1,
-      duration: 0.6,
-      ease: 'power2.out',
-    });
 
     return () => {
-      tween.kill();
+      clearTimeout(timeoutId);
+
+      if (cleanupTweenRef.current) {
+        cleanupTweenRef.current.kill();
+      }
     };
   }, [ref]);
-}
+};
 
 export const useExpand = (ref: RefObject<HTMLDivElement>) => {
   const initialConfigRef = useRef<gsap.TweenVars>({top: 0, left: 0, rotation: 0, width: 0, height: 0});
