@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useRef } from "react";
 import gsap from "gsap";
 import Draggable from "gsap/dist/Draggable";
 import { useGSAP } from "@gsap/react";
@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(useGSAP, Draggable);
 
 const useInitialConfig = (ref: RefObject<HTMLDivElement>) => {
-  const initialConfigRef = useRef({top: 0, left: 0, rotation: 0});
+  const initialConfigRef = useRef({top: 0, left: 0, rotation: 0, width: 0, height: 0});
 
   return { initialConfigRef };
 }
@@ -30,7 +30,7 @@ export const useRandomPosition = (ref: RefObject<HTMLDivElement>) => {
     const maxTop = screenHeight - (imageHeight * 1.15);
     const randomLeft = gsap.utils.random(minLeft, maxLeft);
     const randomTop = gsap.utils.random(minTop, maxTop);
-    const randomRotation = gsap.utils.random(-25, 25);
+    const randomRotation = gsap.utils.random(0, 0);
     const randomConfig = {
       top: randomTop,
       left: randomLeft,
@@ -50,16 +50,11 @@ export const useRandomPosition = (ref: RefObject<HTMLDivElement>) => {
     gsap.to(ref.current, {
       ...randomConfig,
     });
-
-    initialConfigRef.current = {
-      ...randomConfig,
-    }
   }, [initialConfigRef, ref]);
 }
 
 export const useExpand = (ref: RefObject<HTMLDivElement>) => {
   const { initialConfigRef } = useInitialConfig(ref);
-  console.log(initialConfigRef.current);
 
   const expand = () => {
     if (!ref.current) {
@@ -67,18 +62,28 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
     }
 
     const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
     const imageRect = ref.current.getBoundingClientRect();
-    const imageWidth = imageRect.width;
-    const imageHeight = imageRect.height;
+    const currentImageWidth = imageRect.width;
+    const currentImageHeight = imageRect.height;
+    const newImageWidth = screenWidth * 0.9;
     const centerCoords = {
-      top: (screenHeight / 2) - (imageHeight / 2),
-      left: (screenWidth / 2) - (imageWidth / 2),
+      top: '15%',
+      left: '5%',
+      rotation: 0,
+    }
+
+    initialConfigRef.current = {
+      width: currentImageWidth,
+      height: currentImageHeight,
+      top: imageRect.top,
+      left: imageRect.left,
       rotation: 0,
     }
   
     gsap.to(ref.current, {
       ...centerCoords,
+      width: newImageWidth,
+      height: 'auto',
     });
   }
   
@@ -104,29 +109,6 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
   const draggableRef = useRef<Draggable | null>(null);
   const { initialConfigRef } = useInitialConfig(ref);
 
-  console.log(initialConfigRef.current);
-
-  // const draggable = Draggable.create(ref.current, {
-  //   type: 'x,y',
-  //   allowContextMenu: false,
-  //   dragResistance: 0.1,
-  //   touchAction: 'none',
-  //   // onDragEnd() { 
-  //   //   if (!ref.current || !isLoaded) {
-  //   //     return;
-  //   //   }
-
-  //   //   const rect = ref.current?.getBoundingClientRect();
-      
-  //   //   if (!rect) {
-  //   //     return;
-  //   //   }
-
-  //   //   position.current.x = (rect.left / window.innerWidth) * 100;
-  //   //   position.current.y = (rect.top / window.innerHeight) * 100;
-  //   // }
-  // });
-
   useEffect(() => {
     draggableRef.current = Draggable.create(ref.current, {
       type: 'top,left',
@@ -144,8 +126,10 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
           return;
         }
 
-        initialConfigRef.current.top = imageRect.top;
-        initialConfigRef.current.left = imageRect.left;
+        // initialConfigRef.current.top = imageRect.top;
+        // initialConfigRef.current.left = imageRect.left;
+
+        // console.log(initialConfigRef.current);
       },
     })[0];
   }, [initialConfigRef, ref]);
