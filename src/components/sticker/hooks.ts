@@ -7,7 +7,6 @@ import { useOnClickOutside } from "@/lib/layout";
 gsap.registerPlugin(useGSAP, Draggable);
 
 export const useRandomPosition = (ref: RefObject<HTMLDivElement>) => {
- 
   useEffect(() => {
     if (!ref.current) {
       return;
@@ -18,8 +17,8 @@ export const useRandomPosition = (ref: RefObject<HTMLDivElement>) => {
     const imageWidth = ref.current.clientWidth;
     const imageHeight = ref.current.clientHeight;
     const minLeft = imageWidth * 0.15;
-    const maxLeft = screenWidth - (imageWidth * 1.15);
     const minTop = imageHeight * 0.15;
+    const maxLeft = screenWidth - (imageWidth * 1.15);
     const maxTop = screenHeight - (imageHeight * 1.15);
     const randomLeft = gsap.utils.random(minLeft, maxLeft);
     const randomTop = gsap.utils.random(minTop, maxTop);
@@ -78,8 +77,8 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
       rotation: 0,
       width: newImageWidth,
       height: 'auto',
-      duration: 0.6,
-      ease: 'power2.in',
+      duration: 0.4,
+      ease: 'expo.out',
       attr: { ["data-expanded"]: 'true' }
     });
 
@@ -95,8 +94,8 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
   
     gsap.to(ref.current, {
       ...initialConfigRef.current,
-      duration: 0.6,
-      ease: 'power2.out',
+      duration: 0.2,
+      ease: 'power3.inOut',
       attr: { ["data-expanded"]: 'false' }
     });
 
