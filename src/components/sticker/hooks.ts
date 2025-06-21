@@ -41,11 +41,18 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
 
   useGSAP(() => {
     if (ref.current && isLoaded) {
-      const imageWidth = ref.current.clientWidth;
-      const imageHeight = ref.current.clientHeight;
+      const img = ref.current.querySelector('img');
+
+      if (!img) {
+        console.error('No <img> element found!');
+  
+        return;
+      }
+
       const containerWidth = window.innerWidth;
       const containerHeight = window.innerHeight;
-
+      const imageWidth = img.clientWidth;
+      const imageHeight = img.clientHeight;
       
       const maxX = ((containerWidth - imageWidth) / containerWidth) * 100;
       const maxY = ((containerHeight - imageHeight) / containerHeight) * 92;

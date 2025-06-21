@@ -2,32 +2,30 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 150px;
-  max-width: 800px;
   cursor: pointer;
 }
 
+.sticker .image {
+  display: flex;
+  width: 150px;
+}
+
 @media screen and (min-width: 90em) {
-  .sticker {
+  .sticker .image {
     width: 400px;
   }
 }
 
 @media screen and (min-width: 60em) and (max-width: 90em) {
-  .sticker {
+  .sticker .image {
     width: 250px;
   }
 }
 
 @media screen and (min-width: 30em) and (max-width: 60em) {
-  .sticker {
+  .sticker .image {
     width: 200px;
   }
-}
-
-.sticker .image {
-  width: 100%;
-  display: flex;
 }
 
 .sticker-link:hover,

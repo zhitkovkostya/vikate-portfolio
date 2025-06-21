@@ -5,7 +5,7 @@ import styles from "./sticker.module.css";
 import { Props } from "./types";
 
 export const Sticker = ({ imageUrl, title, path }: Props) => {
-  const ref = useRef<HTMLDivElement>(null);  
+  const ref = useRef<HTMLDivElement>(null);
   const { onClick } = useDraggable(ref);
 
   return (
