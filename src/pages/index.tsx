@@ -8,7 +8,7 @@ import { fetchPage } from "@/entities/page";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-export default function Home({ data }: Props) {
+export default function Home({ data: { page, projects } }: Props) {
   return (
     <>
       <Head>
@@ -18,10 +18,12 @@ export default function Home({ data }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Body>
-        <Content>
-          {data.page?.body && documentToReactComponents(data.page?.body)}
-        </Content>
-        {data.projects.map((project) => (
+        {page?.body && (
+          <Content>
+            {documentToReactComponents(page.body)}
+          </Content>
+        )}
+        {projects.map((project) => (
           <ProjectSticker
             key={project.slug}
             title={project.title}
