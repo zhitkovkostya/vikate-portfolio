@@ -5,10 +5,18 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP, Draggable);
 
-export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
-  const [isActive, setIsActive] = useState(false);
+const getResponsiveSize = () => {
+  const vw = window.innerWidth;
+
+  if (vw >= 1440) return 400;
+  if (vw >= 960) return 250;
+  if (vw >= 480) return 200;
+
+  return 150;
+};
+
+const useImageLoaded = (ref: RefObject<HTMLDivElement>) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const position = useRef({x: 0, y: 0, rotation: 0, width: 0})
 
   useEffect(() => {
     if (!ref.current) {
@@ -39,6 +47,14 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
     };
   }, [ref]);
 
+  return { isLoaded };
+}
+
+export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
+  const [isActive, setIsActive] = useState(false);
+  const { isLoaded } = useImageLoaded(ref);
+  const position = useRef({x: 0, y: 0, rotation: 0, width: 0})
+
   useGSAP(() => {
     if (ref.current && isLoaded) {
       const img = ref.current.querySelector('img');
@@ -51,8 +67,8 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
 
       const containerWidth = window.innerWidth;
       const containerHeight = window.innerHeight;
-      const imageWidth = img.clientWidth;
-      const imageHeight = img.clientHeight;
+      const imageWidth = getResponsiveSize();
+      const imageHeight = getResponsiveSize();
       
       const maxX = ((containerWidth - imageWidth) / containerWidth) * 100;
       const maxY = ((containerHeight - imageHeight) / containerHeight) * 92;
