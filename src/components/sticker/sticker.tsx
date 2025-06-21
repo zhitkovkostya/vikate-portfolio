@@ -3,23 +3,13 @@ import Link from "next/link";
 import { useDraggable, useExpand, useRandomPosition } from "./hooks";
 import styles from "./sticker.module.css";
 import { Props } from "./types";
+import { useOnClickOutside } from "@/lib/layout";
 
 export const Sticker = ({ imageUrl, title, path }: Props) => {
-  const [isExpanded, setExpanded] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const { onClick } = useExpand(ref);
   useRandomPosition(ref);
   useDraggable(ref);
-  const { expand, collapse } = useExpand(ref);
-
-  const onClick = () => {
-    if (isExpanded) {
-      collapse();
-    } else {
-      expand();
-    }
-
-    setExpanded(currentValue => !currentValue);
-  }
 
   return (
     <div ref={ref} className={styles["sticker"]}>

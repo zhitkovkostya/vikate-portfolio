@@ -1,7 +1,8 @@
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Draggable from "gsap/dist/Draggable";
 import { useGSAP } from "@gsap/react";
+import { useOnClickOutside } from "@/lib/layout";
 
 gsap.registerPlugin(useGSAP, Draggable);
 
@@ -54,6 +55,7 @@ export const useRandomPosition = (ref: RefObject<HTMLDivElement>) => {
 }
 
 export const useExpand = (ref: RefObject<HTMLDivElement>) => {
+  const [isExpanded, setExpanded] = useState(false);
   const { initialConfigRef } = useInitialConfig(ref);
 
   const expand = () => {
@@ -85,10 +87,12 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
       width: newImageWidth,
       height: 'auto',
     });
+    
+    setExpanded(true);
   }
   
   const collapse = () => {
-    if (!ref.current) {
+    if (!ref.current || !isExpanded) {
       return;
     }
 
@@ -97,11 +101,22 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
     gsap.to(ref.current, {
       ...initialConfigRef.current,
     });
+
+    setExpanded(false);
   }
 
+  const onClick = () => {
+    if (isExpanded) {
+      collapse();
+    } else {
+      expand();
+    }
+  }
+
+  useOnClickOutside(ref, collapse);
+
   return {
-    expand,
-    collapse,
+    onClick,
   }
 }
 

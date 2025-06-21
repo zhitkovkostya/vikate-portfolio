@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link"
 import { useRouter } from "next/router";
+import { useOnClickOutside } from "../../lib/layout";
 import styles from './header.module.css';
 import { Props } from "./types";
-import { useOnClickOutside } from "./hooks";
 
 export const Header = ({siteTitle, pageTitle, menuItems}: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
