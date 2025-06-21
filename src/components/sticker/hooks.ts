@@ -34,13 +34,14 @@ export const useRandomPosition = (ref: RefObject<HTMLDivElement>) => {
       rotation: 0,
     };
 
-
     gsap.set(ref.current, {
       ...centeredConfig,
+      opacity: 0,
     });
 
     const tween = gsap.to(ref.current, {
       ...randomConfig,
+      opacity: 1,
       duration: 0.6,
       ease: 'power2.out',
     });
