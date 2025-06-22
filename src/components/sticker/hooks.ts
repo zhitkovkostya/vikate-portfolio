@@ -6,9 +6,9 @@ import { useOnClickOutside } from "@/lib/layout";
 
 gsap.registerPlugin(useGSAP, Draggable);
 
-export const useRandomPosition = (ref: RefObject<HTMLDivElement>) => {
+export const useRandomPosition = (ref: RefObject<HTMLDivElement>, { skip = false } = {}) => {
   useEffect(() => {
-    if (!ref.current) {
+    if (!ref.current || skip) {
       return;
     }
 
@@ -49,7 +49,7 @@ export const useRandomPosition = (ref: RefObject<HTMLDivElement>) => {
     return () => {
       tween.kill();
     };
-  }, [ref]);
+  }, [ref, skip]);
 };
 
 export const useExpand = (ref: RefObject<HTMLDivElement>) => {

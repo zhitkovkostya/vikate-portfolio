@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useDraggable, useExpand, useRandomPosition } from "./hooks";
@@ -6,8 +6,9 @@ import styles from "./sticker.module.css";
 import { Props } from "./types";
 
 export const Sticker = ({ imageUrl, title, path, width, height }: Props) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  useRandomPosition(ref);
+  useRandomPosition(ref, { skip: !isLoaded });
   useDraggable(ref);
   const { onClick } = useExpand(ref);
 
@@ -23,7 +24,10 @@ export const Sticker = ({ imageUrl, title, path, width, height }: Props) => {
             width={width}
             height={height}
             placeholder="blur"
-            blurDataURL={`/_next/image?url=${imageUrl}&w=16&q=1`}
+            blurDataURL={`/_next/image?url=${imageUrl}&w=16&q=10`}
+            onLoad={() => {
+              setIsLoaded(true);
+            }}
           />
         </Link>
         : 
@@ -34,6 +38,11 @@ export const Sticker = ({ imageUrl, title, path, width, height }: Props) => {
               className={styles['image']}
               width={width}
               height={height}
+              placeholder="blur"
+              blurDataURL={`/_next/image?url=${imageUrl}&w=16&q=10`}
+              onLoad={() => {
+                setIsLoaded(true);
+              }}
             />
           </button>
       }
