@@ -17,70 +17,59 @@ export const useRandomPosition = (
 
     let tween: gsap.core.Tween;
 
-    const frameId = requestAnimationFrame(() => {
-      const el = ref.current;
-      
-      if (!el) {
-        return;
-      }
+    const el = ref.current;
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    const imageWidth = el.clientWidth;
+    const imageHeight = el.clientHeight;
 
-      const screenWidth = window.innerWidth;
-      const screenHeight = window.innerHeight;
-      const imageWidth = el.clientWidth;
-      const imageHeight = el.clientHeight;
+    if (!imageWidth || !imageHeight) {
+      return;
+    }
 
-      if (!imageWidth || !imageHeight) {
-        return;
-      }
+    // Центр экрана
+    const centerX = (screenWidth - imageWidth) / 2;
+    const centerY = (screenHeight - imageHeight) / 2;
 
-      // Центр экрана
-      const centerX = (screenWidth - imageWidth) / 2;
-      const centerY = (screenHeight - imageHeight) / 2;
+    // Генерация случайной позиции в пределах экрана
+    const minLeft = imageWidth * 0.3;
+    const maxLeft = screenWidth - imageWidth * 1.3;
+    const minTop = imageHeight * 0.3;
+    const maxTop = screenHeight - imageHeight * 1.3;
 
-      // Генерация случайной позиции в пределах экрана
-      const minLeft = imageWidth * 0.3;
-      const maxLeft = screenWidth - imageWidth * 1.3;
-      const minTop = imageHeight * 0.3;
-      const maxTop = screenHeight - imageHeight * 1.3;
+    const randomLeft = gsap.utils.random(minLeft, maxLeft);
+    const randomTop = gsap.utils.random(minTop, maxTop);
+    const randomRotation = gsap.utils.random(-20, 20);
+    const delay = gsap.utils.random(0, 0.4);
 
-      const randomLeft = gsap.utils.random(minLeft, maxLeft);
-      const randomTop = gsap.utils.random(minTop, maxTop);
-      const randomRotation = gsap.utils.random(-20, 20);
-      const delay = gsap.utils.random(0, 0.4);
+    // Вычисляем смещения от центра
+    const dx = randomLeft - centerX;
+    const dy = randomTop - centerY;
 
-      // Вычисляем смещения от центра
-      const dx = randomLeft - centerX;
-      const dy = randomTop - centerY;
+    // Начальное положение — в центре экрана
+    gsap.set(el, {
+      x: 0,
+      y: 0,
+      rotation: 0,
+      opacity: 0,
+      position: 'absolute',
+      left: centerX,
+      top: centerY,
+    });
 
-      // Начальное положение — в центре экрана
-      gsap.set(el, {
-        x: 0,
-        y: 0,
-        rotation: 0,
-        opacity: 0,
-        position: 'absolute',
-        left: centerX,
-        top: centerY,
-      });
-
-      // Анимация к случайному положению
-      tween = gsap.to(el, {
-        x: dx,
-        y: dy,
-        rotation: randomRotation,
-        opacity: 1,
-        duration: 0.6,
-        delay,
-        ease: 'power2.out',
-      });
+    // Анимация к случайному положению
+    tween = gsap.to(el, {
+      x: dx,
+      y: dy,
+      rotation: randomRotation,
+      opacity: 1,
+      duration: 0.6,
+      delay,
+      ease: 'power2.out',
     });
 
     return () => {
-      cancelAnimationFrame(frameId);
-      
-      if (tween) {
-        tween.kill();
-      }
+      tween.kill();
     };
   }, [ref, skip]);
 };
