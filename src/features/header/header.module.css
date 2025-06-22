@@ -8,14 +8,13 @@
   width: 100%;
   padding: 1rem var(--h-padding);
   border-bottom: 2px solid rgb(var(--foreground-rgb));
-  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: background-color 0.6s cubic-bezier(0.19, 1, 0.22, 1);
   backdrop-filter: grayscale(0.5) blur(4px);
   z-index: var(--z-index);
 }
 
 .header--with-menu {
   background-color: rgb(var(--background-rgb));
-  backdrop-filter: grayscale(0.5) blur(16px);
 }
 
 .logo {
@@ -89,7 +88,9 @@
   list-style: none;
   opacity: 0;
   transform: translateY(10%);
-  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  transition:
+    opacity 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+    transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
   pointer-events: none;
   max-height: 60vh;
 }

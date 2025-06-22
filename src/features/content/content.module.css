@@ -2,7 +2,7 @@
   padding: 6rem 1rem 0;
   font-size: 22px;
   font-weight: 300;
-  transition: all 0.15s;
+  transition: padding 0.15s;
   user-select: none;
 }
 
