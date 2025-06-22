@@ -1,5 +1,5 @@
 .sticker {
-  position: fixed;
+  position: fixed !important;
   width: 150px;
   cursor: pointer;
   transform-origin: center;
