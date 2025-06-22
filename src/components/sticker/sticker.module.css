@@ -5,7 +5,6 @@
   width: 150px;
   cursor: pointer;
   transform-origin: center;
-  transform: translate(-50%, -50%);
   will-change: transform;
   opacity: 0;
 }
