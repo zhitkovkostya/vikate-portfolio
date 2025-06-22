@@ -6,54 +6,87 @@ import { useOnClickOutside } from "@/lib/layout";
 
 gsap.registerPlugin(useGSAP, Draggable);
 
-export const useRandomPosition = (ref: RefObject<HTMLDivElement>, { skip = false } = {}) => {
+export const useRandomPosition = (
+  ref: RefObject<HTMLDivElement>,
+  { skip = false } = {}
+) => {
   useEffect(() => {
     if (!ref.current || skip) {
       return;
     }
 
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    const imageWidth = ref.current.clientWidth;
-    const imageHeight = ref.current.clientHeight;
+    let tween: gsap.core.Tween;
 
-    const minLeft = imageWidth * 0.3;
-    const minTop = imageHeight * 0.3;
-    const maxLeft = screenWidth - (imageWidth * 1.3);
-    const maxTop = screenHeight - (imageHeight * 1.3);
+    const frameId = requestAnimationFrame(() => {
+      const el = ref.current;
+      
+      if (!el) {
+        return;
+      }
 
-    const randomLeft = gsap.utils.random(minLeft, maxLeft);
-    const randomTop = gsap.utils.random(minTop, maxTop);
-    const randomRotation = gsap.utils.random(-20, 20);
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      const imageWidth = el.clientWidth;
+      const imageHeight = el.clientHeight;
 
-    const centeredConfig = {
-      top: (screenHeight / 2) - (imageHeight / 2),
-      left: (screenWidth / 2) - (imageWidth / 2),
-      rotation: 0,
-    };
+      if (!imageWidth || !imageHeight) {
+        return;
+      }
 
-    gsap.set(ref.current, {
-      ...centeredConfig,
-      opacity: 0,
-    });
+      // Центр экрана
+      const centerX = (screenWidth - imageWidth) / 2;
+      const centerY = (screenHeight - imageHeight) / 2;
 
-    const tween = gsap.to(ref.current, {
-      top: randomTop,
-      left: randomLeft,
-      rotation: randomRotation,
-      opacity: 1,
-      duration: 0.6,
-      ease: 'power2.out',
+      // Генерация случайной позиции в пределах экрана
+      const minLeft = imageWidth * 0.3;
+      const maxLeft = screenWidth - imageWidth * 1.3;
+      const minTop = imageHeight * 0.3;
+      const maxTop = screenHeight - imageHeight * 1.3;
+
+      const randomLeft = gsap.utils.random(minLeft, maxLeft);
+      const randomTop = gsap.utils.random(minTop, maxTop);
+      const randomRotation = gsap.utils.random(-20, 20);
+      const delay = gsap.utils.random(0, 0.4);
+
+      // Вычисляем смещения от центра
+      const dx = randomLeft - centerX;
+      const dy = randomTop - centerY;
+
+      // Начальное положение — в центре экрана
+      gsap.set(el, {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        opacity: 0,
+        position: 'absolute',
+        left: centerX,
+        top: centerY,
+      });
+
+      // Анимация к случайному положению
+      tween = gsap.to(el, {
+        x: dx,
+        y: dy,
+        rotation: randomRotation,
+        opacity: 1,
+        duration: 0.6,
+        delay,
+        ease: 'power2.out',
+      });
     });
 
     return () => {
-      tween.kill();
+      cancelAnimationFrame(frameId);
+      
+      if (tween) {
+        tween.kill();
+      }
     };
   }, [ref, skip]);
 };
 
 export const useExpand = (ref: RefObject<HTMLDivElement>) => {
-  const initialConfigRef = useRef<gsap.TweenVars>({top: 0, left: 0, rotation: 0, width: 0, height: 0});
+  const initialConfigRef = useRef<gsap.TweenVars>({x: 0, y: 0, top: 0, left: 0, rotation: 0, width: 0, height: 0});
   const [isExpanded, setExpanded] = useState(false);
 
   const expand = () => {
@@ -63,9 +96,12 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
 
     const screenWidth = window.innerWidth;
     const newImageWidth = screenWidth * 0.9;
+    const centerX = (screenWidth - newImageWidth) / 2;
 
     initialConfigRef.current.height = ref.current.offsetHeight;
     initialConfigRef.current.width = ref.current.offsetWidth;
+    initialConfigRef.current.x = ref.current._gsap.x;
+    initialConfigRef.current.y = ref.current._gsap.y;
     initialConfigRef.current.top = ref.current.offsetTop;
     initialConfigRef.current.left = ref.current.offsetLeft;
     initialConfigRef.current.rotation = gsap.utils.random(-20, 20);
@@ -73,8 +109,10 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
     gsap.killTweensOf(ref.current);
 
     gsap.to(ref.current, {
-      top: '15%',
-      left: '5%',
+      x: centerX,
+      y: 120,
+      top: 0,
+      left: 0,
       rotation: 0,
       width: newImageWidth,
       height: 'auto',
@@ -127,7 +165,7 @@ export const useDraggable = (ref: RefObject<HTMLDivElement>) => {
     }
 
     const draggable = Draggable.create(ref.current, {
-      type: 'top,left',
+      type: 'x,y',
       allowContextMenu: false,
       dragResistance: 0.1,
       touchAction: 'none',
