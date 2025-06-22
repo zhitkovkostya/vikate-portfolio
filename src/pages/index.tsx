@@ -27,7 +27,7 @@ export default function Home({ data: { page, projects } }: Props) {
           <ProjectSticker
             key={project.slug}
             title={project.title}
-            imageUrl={project.thumbnail}
+            image={project.thumbnail}
             path={`/project/${project.slug}`}
           />
         ))}

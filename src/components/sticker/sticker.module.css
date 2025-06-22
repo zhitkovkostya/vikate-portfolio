@@ -30,6 +30,7 @@
 .sticker .image {
   display: flex;
   width: 100%;
+  height: auto;
 }
 
 .sticker-link:hover,

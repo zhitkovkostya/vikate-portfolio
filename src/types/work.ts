@@ -1,4 +1,6 @@
+import { Image } from "./image";
+
 export type Work = {
   title: string;
-  thumbnail: string;
+  thumbnail: Image;
 };

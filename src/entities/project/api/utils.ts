@@ -1,26 +1,27 @@
-import { Asset, Entry } from "contentful";
+import { Asset, AssetFile, Entry } from "contentful";
 import { Document } from '@contentful/rich-text-types';
 import { Project } from "@/entities/project";
 import { ProjectSkeleton } from "./types";
+import { Image } from "@/types/image";
 
-const unpackFileUrl = (file: Asset) => {
-  return file.fields?.file?.url as string;
-};
+const unpackImage = (file: AssetFile): Image => ({
+  url: `https:${file.url}`,
+  title: file.fileName,
+  width: file.details.image?.width ?? 0,
+  height: file.details.image?.height ?? 0,
+});
 
-const unpackFile = (file: Asset) => {
-  return {
-    title: file.fields?.file?.fileName as string,
-    thumbnail: file.fields?.file?.url as string
-  };
-};
-
-export const unpackProject = (projectEntry: Entry<ProjectSkeleton>): Project => {
+export const unpackProject = (projectEntry: Entry<ProjectSkeleton>): Project => {  
   return {
     title: projectEntry.fields.title as string ?? '',
     slug: projectEntry.fields.slug as string ?? '',
-    thumbnail: unpackFileUrl(projectEntry.fields.thumbnail as unknown as Asset) ?? '',
+    // @ts-ignore
+    thumbnail: unpackImage(projectEntry.fields.thumbnail.fields.file),
     body:  projectEntry.fields.description as Document ?? null,
     // @ts-ignore
-    works: projectEntry.fields.gallery.map(unpackFile).filter(Boolean),
+    works: projectEntry.fields.gallery.map(asset => ({
+      title: asset.fields.title,
+      thumbnail: unpackImage(asset.fields.file),
+    })),
   };
 }

@@ -1,4 +1,6 @@
+import { Image } from "@/types/image";
+
 export type Props = {
-  imageUrl: string;
+  image: Image;
   title: string;
 };

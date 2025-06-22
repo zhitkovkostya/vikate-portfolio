@@ -8,23 +8,21 @@ import { WorkSticker } from "@/entities/work/work-sticker";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const ProjectPage = ({ data }: Props) => {
-  return (
-    <>
-      <Head>
-        <title>{data.project?.title} | викатэ</title>
-      </Head>
-      <Body>
-        <Content>
-          {data.project?.body && documentToReactComponents(data.project?.body)}
-        </Content>
-        {data.project?.works.map(({ title, thumbnail }) => (
-          <WorkSticker title={title} imageUrl={thumbnail} key={thumbnail} />
-        ))}
-      </Body>
-    </>
-  );
-};
+const ProjectPage = ({ data }: Props) => (
+  <>
+    <Head>
+      <title>{data.project?.title} | викатэ</title>
+    </Head>
+    <Body>
+      <Content>
+        {data.project?.body && documentToReactComponents(data.project?.body)}
+      </Content>
+      {data.project?.works.map(({ title, thumbnail }) => (
+        <WorkSticker title={title} image={thumbnail} key={thumbnail.url ?? ''} />
+      ))}
+    </Body>
+  </>
+);
 
 export const getStaticProps = async ({
   params,
