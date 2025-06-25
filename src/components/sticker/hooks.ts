@@ -83,8 +83,9 @@ export const useExpand = (ref: RefObject<HTMLDivElement>) => {
       return;
     }
 
+    const maxImageWidth = 800;
     const screenWidth = window.innerWidth;
-    const newImageWidth = screenWidth * 0.9;
+    const newImageWidth = Math.min(screenWidth * 0.9, maxImageWidth);
     const centerX = (screenWidth - newImageWidth) / 2;
 
     initialConfigRef.current.height = ref.current.offsetHeight;
