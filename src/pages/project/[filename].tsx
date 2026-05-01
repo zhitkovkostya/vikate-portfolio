@@ -30,13 +30,13 @@ export const getStaticProps = async ({
   params: { filename: string };
 }) => {
   const projects = await fetchAllProjects();
-  const project = await fetchProject(params.filename);
+  const project = params?.filename ? await fetchProject(params.filename) : null;
 
   return {
     props: {
       data: {
-        projects,
-        project,
+        projects: projects ?? [],
+        project: project ?? null,
         global: {
           title: 'викатэ'
         }
@@ -49,12 +49,12 @@ export const getStaticPaths = async () => {
   const projects = await fetchAllProjects();
 
   return {
-    paths: projects?.map((project) => ({
+    paths: (projects ?? []).map((project) => ({
       params: { filename: project.slug },
     })),
     fallback: false,
   };
-
 };
+
 
 export default ProjectPage;
