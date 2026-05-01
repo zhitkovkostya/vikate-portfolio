@@ -12,16 +12,21 @@ const unpackImage = (file: AssetFile): Image => ({
 });
 
 export const unpackProject = (projectEntry: Entry<ProjectSkeleton>): Project => {  
-  return {
-    title: projectEntry.fields.title as string ?? '',
-    slug: projectEntry.fields.slug as string ?? '',
-    // @ts-ignore
-    thumbnail: unpackImage(projectEntry.fields.thumbnail.fields.file),
-    body:  projectEntry.fields.description as Document ?? null,
-    // @ts-ignore
-    works: projectEntry.fields.gallery.map(asset => ({
-      title: asset.fields.title,
-      thumbnail: unpackImage(asset.fields.file),
-    })),
-  };
+  try {
+    return {
+      title: projectEntry.fields.title as string ?? '',
+      slug: projectEntry.fields.slug as string ?? '',
+      // @ts-ignore
+      thumbnail: unpackImage(projectEntry.fields.thumbnail.fields.file),
+      body:  projectEntry.fields.description as Document ?? null,
+      // @ts-ignore
+      works: projectEntry.fields.gallery.map(asset => ({
+        title: asset.fields.title,
+        thumbnail: unpackImage(asset.fields.file),
+      })),
+    };
+  } catch (e) {
+    console.log('Failed to unpack project:', JSON.stringify(projectEntry.fields, null, 2));
+    throw e;
+  }
 }

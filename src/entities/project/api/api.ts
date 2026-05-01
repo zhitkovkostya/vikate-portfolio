@@ -9,16 +9,11 @@ export const fetchAllProjects = async (): Promise<Project[]> => {
     return [];
   }
 
-  console.log('client ok, fetching...');
-  
   const response = await client.getEntries<ProjectSkeleton>({
     content_type: 'project',
     // @ts-ignore
     order: ['fields.title'],
   });
-
-  console.log('response:', JSON.stringify(response, null, 2));
-  console.log('items:', response?.items);
 
   const { items: projectEntries } = response;
   
