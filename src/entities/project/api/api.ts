@@ -4,19 +4,25 @@ import { unpackProject } from "./utils";
 import { ProjectSkeleton } from "./types";
 
 export const fetchAllProjects = async (): Promise<Project[]> => {
-  const { items: projectEntries } = await client.getEntries<ProjectSkeleton>({
+  if (!client) {
+    console.log('client is null');
+    return [];
+  }
+
+  console.log('client ok, fetching...');
+  
+  const response = await client.getEntries<ProjectSkeleton>({
     content_type: 'project',
     // @ts-ignore
     order: ['fields.title'],
   });
+
+  console.log('response:', JSON.stringify(response, null, 2));
+  console.log('items:', response?.items);
+
+  const { items: projectEntries } = response;
   
-  if (projectEntries) {
-    return projectEntries.map(unpackProject);
-  }
-
-  console.log(`Error getting Entries for Projects.`);
-
-  return [];
+  return projectEntries ? projectEntries.map(unpackProject) : [];
 };
 
 export const fetchProject = async (slug: string): Promise<Project | undefined> => {
