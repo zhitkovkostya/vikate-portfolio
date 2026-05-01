@@ -20,9 +20,11 @@ export const unpackProject = (projectEntry: Entry<ProjectSkeleton>): Project => 
       thumbnail: unpackImage(projectEntry.fields.thumbnail.fields.file),
       body:  projectEntry.fields.description as Document ?? null,
       // @ts-ignore
-      works: projectEntry.fields.gallery.map(asset => ({
+      works: (projectEntry.fields.gallery ?? []).map(asset => ({
         title: asset.fields.title,
-        thumbnail: unpackImage(asset.fields.file),
+        thumbnail: projectEntry.fields.thumbnail?.fields?.file 
+          ? unpackImage(projectEntry.fields.thumbnail.fields.file) 
+          : null,
       })),
     };
   } catch (e) {

@@ -73,10 +73,6 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-      - name: Check env vars
-        run: |
-          echo "Space ID is set: ${{ secrets.CONTENTFUL_SPACE_ID != '' }}"
-          echo "Token is set: ${{ secrets.CONTENTFUL_ACCESS_TOKEN != '' }}"
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
         env:
