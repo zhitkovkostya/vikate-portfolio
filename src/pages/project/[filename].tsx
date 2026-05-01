@@ -30,7 +30,7 @@ export const getStaticProps = async ({
   params: { filename: string };
 }) => {
   const projects = await fetchAllProjects();
-  const project = params?.filename ? await fetchProject(params.filename) : null;
+  const project = await fetchProject(params.filename);
 
   return {
     props: {

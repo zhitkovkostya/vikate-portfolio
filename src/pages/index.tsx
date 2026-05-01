@@ -23,7 +23,7 @@ export default function Home({ data: { page, projects } }: Props) {
             {documentToReactComponents(page.body)}
           </Content>
         )}
-        {projects.map((project) => (
+        {projects.map((project, i) => (
           <ProjectSticker
             key={project.slug}
             title={project.title}
@@ -37,8 +37,12 @@ export default function Home({ data: { page, projects } }: Props) {
 }
 
 export const getStaticProps = async () => {
-  const projects = await fetchAllProjects();
+  const allProjects = await fetchAllProjects();
   const page = await fetchPage('home');
+
+  const projects = (allProjects ?? []).filter(
+    project => project.body || (project.works && project.works.length > 0)
+  );
 
   return {
     props: {
