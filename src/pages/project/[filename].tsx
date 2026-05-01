@@ -17,7 +17,7 @@ const ProjectPage = ({ data }: Props) => (
       <Content>
         {data.project?.body && documentToReactComponents(data.project?.body)}
       </Content>
-      {data.project?.works.map(({ title, thumbnail }) => (
+      {data.project?.works?.map(({ title, thumbnail }) => (
         <WorkSticker title={title} image={thumbnail} key={thumbnail.url ?? ''} />
       ))}
     </Body>
