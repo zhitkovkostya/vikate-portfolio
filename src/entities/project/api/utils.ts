@@ -22,7 +22,9 @@ export const unpackProject = (projectEntry: Entry<ProjectSkeleton>): Project => 
       // @ts-ignore
       works: (projectEntry.fields.gallery ?? []).map(asset => ({
         title: asset.fields.title,
+        // @ts-ignore
         thumbnail: projectEntry.fields.thumbnail?.fields?.file 
+          // @ts-ignore
           ? unpackImage(projectEntry.fields.thumbnail.fields.file) 
           : null,
       })),
